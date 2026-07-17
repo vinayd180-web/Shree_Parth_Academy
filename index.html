@@ -3,291 +3,383 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shree Parth Academy · An Emperor of Knowledge</title>
+    <title>Shree Parth Academy 
+    · An Emperor of Knowledge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root {
-            --primary: #0a1628;
-            --gold: #d4a843;
-            --gold-light: #f0d080;
-            --gold-gradient: linear-gradient(135deg, #d4a843, #f0d080);
-            --white: #ffffff;
-            --light-bg: #f8f4ef;
-            --shadow: 0 20px 60px rgba(0,0,0,0.08);
-            --radius: 20px;
+            --primary: #0a0618;
+            --gold: #ffd700;
+            --gold-glow: 0 0 25px rgba(255,215,0,0.4);
+            --pink: #ff6b9d;
+            --teal: #4fd1c5;
+            --purple: #b794f4;
+            --orange: #ff9f43;
+            --neon-green: #7bed9f;
+            --gradient-bg: linear-gradient(135deg, #0a0618 0%, #1a0e2e 40%, #2d1b4e 100%);
+            --shadow: 0 20px 60px rgba(0,0,0,0.5);
+            --radius: 24px;
             --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
             --font-serif: 'Playfair Display', serif;
             --font-devanagari: 'Noto Sans Devanagari', sans-serif;
         }
-        body { font-family:'Inter',sans-serif; background:var(--light-bg); color:var(--primary); line-height:1.6; overflow-x:hidden; }
+        body {
+            font-family:'Inter',sans-serif;
+            background:#0a0618;
+            color:#f0f0f0;
+            line-height:1.6;
+            overflow-x:hidden;
+            background-image:radial-gradient(circle at 20% 30%, rgba(255,215,0,0.05) 0%, transparent 60%),
+                            radial-gradient(circle at 80% 70%, rgba(255,107,157,0.06) 0%, transparent 50%);
+            min-height:100vh;
+        }
 
-        /* ===== NAVBAR ===== */
+        /* Particles */
+        .particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+        .particle {
+            position:absolute;
+            width:6px; height:6px;
+            background:rgba(255,215,0,0.4);
+            border-radius:50%;
+            animation:floatParticle 20s infinite alternate ease-in-out;
+            box-shadow:0 0 12px rgba(255,215,0,0.2);
+        }
+        .particle:nth-child(1) { left:10%; top:20%; animation-duration:25s; width:8px; height:8px; }
+        .particle:nth-child(2) { left:85%; top:15%; animation-duration:30s; background:rgba(255,107,157,0.3); }
+        .particle:nth-child(3) { left:50%; top:80%; animation-duration:22s; background:rgba(79,209,197,0.3); }
+        .particle:nth-child(4) { left:20%; top:70%; animation-duration:28s; background:rgba(183,148,244,0.3); }
+        .particle:nth-child(5) { left:75%; top:50%; animation-duration:35s; }
+        .particle:nth-child(6) { left:5%; top:40%; animation-duration:18s; background:rgba(255,159,67,0.3); }
+        @keyframes floatParticle {
+            0% { transform:translate(0,0) scale(1); opacity:0.3; }
+            100% { transform:translate(80px,-60px) scale(1.8); opacity:0.8; }
+        }
+
+        /* Navbar */
         .navbar {
-            background: var(--primary);
-            padding: 0.8rem 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            position: sticky;
-            top:0; z-index:1000;
-            border-bottom: 3px solid var(--gold);
+            background:rgba(10,6,24,0.85);
+            backdrop-filter:blur(12px);
+            border-bottom:2px solid rgba(255,215,0,0.3);
+            padding:0.8rem 2.5rem;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            gap:1rem;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:0 4px 30px rgba(0,0,0,0.5);
         }
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            color: white;
-            font-weight: 800;
-            font-size: 1.6rem;
-            font-family: var(--font-serif);
-            cursor: pointer;
-            user-select: none;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            color:white;
+            font-weight:800;
+            font-size:1.6rem;
+            font-family:var(--font-serif);
+            cursor:pointer;
+            user-select:none;
         }
         .logo img {
-            height: 65px;
-            width: auto;
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-            display: block;
+            height:65px;
+            width:auto;
+            background:transparent !important;
+            border:none !important;
+            padding:0 !important;
+            object-fit:contain;
+            filter:drop-shadow(0 0 12px rgba(255,215,0,0.3));
         }
         .logo .logo-text .sub {
-            font-size: 0.6rem;
-            font-weight: 400;
-            color: var(--gold);
-            letter-spacing: 3px;
+            font-size:0.6rem;
+            font-weight:400;
+            color:var(--gold);
+            letter-spacing:3px;
+            text-shadow:0 0 10px rgba(255,215,0,0.3);
         }
         .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem 1.5rem;
-            flex-wrap: wrap;
+            display:flex;
+            align-items:center;
+            gap:0.5rem 1.5rem;
+            flex-wrap:wrap;
         }
         .nav-links a {
-            color: rgba(255,255,255,0.7);
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 0.5rem 0.8rem;
-            border-radius: 10px;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            position: relative;
+            color:rgba(255,255,255,0.8);
+            font-weight:500;
+            font-size:0.9rem;
+            padding:0.5rem 0.8rem;
+            border-radius:10px;
+            transition:var(--transition);
+            text-decoration:none;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            cursor:pointer;
+            position:relative;
         }
         .nav-links a:hover, .nav-links a.active {
-            color: white;
-            background: rgba(255,255,255,0.08);
+            color:white;
+            background:rgba(255,215,0,0.15);
+            box-shadow:0 0 20px rgba(255,215,0,0.1);
         }
         .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 4px;
+            content:'';
+            position:absolute;
+            bottom:-2px;
+            left:50%;
+            transform:translateX(-50%);
+            width:28px;
+            height:3px;
+            background:var(--gold);
+            border-radius:4px;
+            box-shadow:0 0 12px rgba(255,215,0,0.6);
         }
-        .lang-switcher {
-            display: flex;
-            gap: 0.3rem;
-            background: rgba(255,255,255,0.1);
-            padding: 0.2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .lang-btn {
-            padding: 0.3rem 0.8rem;
-            border-radius: 60px;
-            border: none;
-            background: transparent;
-            color: rgba(255,255,255,0.6);
-            font-weight: 600;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-        }
-        .lang-btn.active { background: var(--gold); color: var(--primary); }
-        .lang-btn:hover:not(.active) { color: white; }
 
-        /* ===== PAGE CONTAINER ===== */
-        .page-container { max-width:1200px; margin:0 auto; padding:2rem; }
-        .page { display:none; animation:fadeIn 0.5s ease; }
+        /* Page Container */
+        .page-container { max-width:1300px; margin:0 auto; padding:2rem; position:relative; z-index:1; }
+        .page { display:none; animation:fadeIn 0.6s ease; }
         .page.active { display:block; }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 
-        /* ===== CARDS ===== */
+        /* Cards */
         .card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(212,168,67,0.15);
-            margin-bottom: 1.5rem;
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(255,215,0,0.2);
+            border-radius:var(--radius);
+            padding:2rem;
+            box-shadow:var(--shadow);
+            transition:var(--transition);
+            margin-bottom:1.5rem;
+            position:relative;
+            overflow:hidden;
         }
-        .card:hover { box-shadow: 0 30px 80px rgba(0,0,0,0.12); transform:translateY(-4px); }
-        .card-premium { background: linear-gradient(145deg, #ffffff, #faf6f0); border: 1px solid var(--gold); }
+        .card::before {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0;
+            height:4px;
+            background:linear-gradient(90deg, var(--gold), var(--pink), var(--teal), var(--purple));
+        }
+        .card:hover { transform:translateY(-6px); border-color:rgba(255,215,0,0.5); box-shadow:0 30px 70px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.05); }
+        .card-premium { background:rgba(255,255,255,0.08); border:2px solid rgba(255,215,0,0.3); box-shadow:0 0 30px rgba(255,215,0,0.05); }
 
         .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-family: var(--font-serif);
+            font-size:2.5rem;
+            font-weight:800;
+            color:white;
+            margin-bottom:2rem;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            font-family:var(--font-serif);
+            text-shadow:0 0 30px rgba(255,215,0,0.1);
         }
-        .section-title i { color: var(--gold); }
+        .section-title i {
+            background:linear-gradient(135deg, var(--gold), var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            filter:drop-shadow(0 0 10px rgba(255,215,0,0.3));
+        }
         .section-title::after {
-            content: '';
+            content:'';
             flex:1;
             height:2px;
-            background: linear-gradient(to right, var(--gold), transparent);
+            background:linear-gradient(90deg, var(--gold), var(--pink), var(--teal), transparent);
             margin-left:1rem;
+            border-radius:4px;
         }
 
         .grid-2col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
-        .grid-3col { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; }
-        .grid-4col { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; }
-
+        .grid-3col { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px,1fr)); gap:1.5rem; }
+        .grid-4col { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:1.5rem; }
         @media (max-width:768px) {
             .grid-2col { grid-template-columns:1fr; }
             .navbar { padding:0.8rem 1rem; }
             .page-container { padding:1rem; }
-            .section-title { font-size:1.6rem; }
-            .logo img { height:50px; }
+            .section-title { font-size:1.8rem; }
         }
 
         .btn-gold {
-            background: var(--gold-gradient);
-            color: var(--primary);
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            background:linear-gradient(135deg, var(--gold), #f5c842);
+            color:#0a0618;
+            padding:0.9rem 2.2rem;
+            border-radius:60px;
+            font-weight:700;
+            border:none;
+            cursor:pointer;
+            transition:var(--transition);
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            box-shadow:0 0 25px rgba(255,215,0,0.3);
         }
-        .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(212,168,67,0.4); }
+        .btn-gold:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 0 40px rgba(255,215,0,0.5); }
+
         .mt-2 { margin-top:1.5rem; }
         .text-center { text-align:center; }
 
-        /* ===== HERO ===== */
+        /* Hero */
         .hero-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #1a2d4a 100%);
-            border-radius: var(--radius);
-            padding: 4rem 3rem;
-            color: white;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(212,168,67,0.2);
-            min-height: 350px;
+            background:linear-gradient(135deg, #0a0618 0%, #1a0e2e 40%, #2d1b4e 100%);
+            border-radius:var(--radius);
+            padding:4rem 3rem;
+            color:white;
+            margin-bottom:3rem;
+            position:relative;
+            overflow:hidden;
+            border:1px solid rgba(255,215,0,0.2);
+            box-shadow:0 0 60px rgba(255,215,0,0.05);
         }
         .hero-section .hero-bg {
-            position: absolute;
-            top:0; left:0; width:100%; height:100%;
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
             object-fit:cover;
-            opacity:0.30;
+            opacity:0.08;
             z-index:0;
         }
         .hero-section .hero-content { position:relative; z-index:1; }
-        .hero-section h1 { font-size:3.5rem; font-weight:900; letter-spacing:-1px; font-family:var(--font-serif); }
-        .hero-section h1 span { color:var(--gold); }
-        .hero-section .tagline { font-size:1.6rem; color:var(--gold); font-weight:600; font-family:var(--font-serif); }
-        .hero-stats { display:flex; gap:3rem; margin-top:2rem; flex-wrap:wrap; }
-        .hero-stats .stat .number { font-size:2.8rem; font-weight:900; color:var(--gold); display:block; font-family:var(--font-serif); }
-        .hero-stats .stat .label { font-size:0.9rem; opacity:0.7; text-transform:uppercase; letter-spacing:1px; }
-
-        /* ===== TRADITION CARDS ===== */
-        .tradition-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            border-top: 4px solid var(--gold);
+        .hero-section h1 {
+            font-size:4rem;
+            font-weight:900;
+            letter-spacing:-1px;
+            font-family:var(--font-serif);
+            text-shadow:0 0 40px rgba(255,215,0,0.2);
         }
-        .tradition-card:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
+        .hero-section h1 span {
+            background:linear-gradient(135deg, var(--gold), var(--pink), var(--teal));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            filter:drop-shadow(0 0 20px rgba(255,215,0,0.2));
+        }
+        .hero-section .tagline {
+            font-size:2rem;
+            color:var(--gold);
+            font-weight:600;
+            font-family:var(--font-serif);
+            text-shadow:0 0 20px rgba(255,215,0,0.2);
+        }
+        .hero-stats { display:flex; gap:3rem; margin-top:2rem; flex-wrap:wrap; }
+        .hero-stats .stat .number {
+            font-size:3rem;
+            font-weight:900;
+            background:linear-gradient(135deg, var(--gold), var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            display:block;
+            font-family:var(--font-serif);
+            filter:drop-shadow(0 0 15px rgba(255,215,0,0.2));
+        }
+        .hero-stats .stat .label { font-size:0.9rem; opacity:0.8; text-transform:uppercase; letter-spacing:1px; }
+
+        /* Tradition Cards */
+        .tradition-card {
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(4px);
+            padding:1.5rem;
+            border-radius:16px;
+            box-shadow:var(--shadow);
+            text-align:center;
+            transition:var(--transition);
+            border-top:6px solid var(--gold);
+            border:1px solid rgba(255,215,0,0.15);
+        }
+        .tradition-card:nth-child(2) { border-top-color:var(--pink); }
+        .tradition-card:nth-child(3) { border-top-color:var(--teal); }
+        .tradition-card:nth-child(4) { border-top-color:var(--purple); }
+        .tradition-card:hover {
+            transform:translateY(-8px);
+            box-shadow:0 30px 60px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.05);
+            border-color:rgba(255,215,0,0.4);
+        }
         .tradition-card .card-img {
             width:100%; height:180px; object-fit:cover;
             border-radius:10px; margin-bottom:0.8rem;
             border:2px solid var(--gold);
-            background:#f0f0f0;
+            box-shadow:0 0 20px rgba(255,215,0,0.1);
         }
-        .tradition-card h3 { font-size:1.2rem; font-family:var(--font-serif); }
-        .tradition-card .marathi { color:#c0392b; font-weight:600; font-size:0.95rem; font-family:var(--font-devanagari); }
-        .tradition-card p { color:#64748b; font-size:0.95rem; margin-top:0.5rem; }
+        .tradition-card h3 { font-size:1.3rem; font-family:var(--font-serif); color:white; }
+        .tradition-card .marathi { color:var(--pink); font-weight:600; font-size:0.95rem; font-family:var(--font-devanagari); }
+        .tradition-card p { color:#b0b0b0; font-size:0.95rem; margin-top:0.5rem; }
 
-        /* ===== MARATHI CARDS ===== */
+        /* Marathi Cards */
         .marathi-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 2px solid var(--gold);
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(4px);
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow:var(--shadow);
+            transition:var(--transition);
+            border:1px solid rgba(255,215,0,0.15);
         }
-        .marathi-card:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
-        .marathi-card img { width:100%; height:auto; display:block; border-bottom: 2px solid var(--gold); }
-        .marathi-card .caption { padding:1rem; text-align:center; background: #fefcf5; font-weight:500; color: var(--primary); }
-        .marathi-card .caption .en { font-size:0.9rem; color:#64748b; margin-top:0.3rem; font-style:italic; }
+        .marathi-card:hover {
+            transform:translateY(-8px);
+            border-color:rgba(255,215,0,0.4);
+            box-shadow:0 30px 60px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.05);
+        }
+        .marathi-card img { width:100%; height:auto; display:block; border-bottom:2px solid var(--gold); }
+        .marathi-card .caption {
+            padding:1rem;
+            text-align:center;
+            background:rgba(0,0,0,0.3);
+            font-weight:500;
+            color:white;
+        }
+        .marathi-card .caption .en { font-size:0.9rem; color:#b0b0b0; margin-top:0.3rem; font-style:italic; }
 
-        /* ===== GALLERY ===== */
+        /* Gallery */
         .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+            gap:1.5rem;
+            margin-top:1.5rem;
         }
         .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            aspect-ratio: 1/1;
-            background: #f0f0f0;
-            border: 2px solid transparent;
-            cursor: pointer;
+            position:relative;
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow:var(--shadow);
+            transition:var(--transition);
+            aspect-ratio:1/1;
+            background:#1a0e2e;
+            border:2px solid rgba(255,215,0,0.15);
+            cursor:pointer;
         }
-        .gallery-item:hover { transform:scale(1.02); border-color:var(--gold); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+        .gallery-item:hover {
+            transform:scale(1.04);
+            border-color:var(--gold);
+            box-shadow:0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.1);
+        }
         .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; }
         .gallery-item .overlay {
-            position:absolute; bottom:0; left:0; right:0;
-            background:linear-gradient(transparent, rgba(10,22,40,0.8));
+            position:absolute;
+            bottom:0; left:0; right:0;
+            background:linear-gradient(transparent, rgba(10,6,24,0.9));
             padding:1.5rem 1rem 0.8rem;
-            color:white; font-weight:600; font-size:0.9rem;
+            color:white;
+            font-weight:600;
+            font-size:0.9rem;
             transform:translateY(100%);
             transition:var(--transition);
         }
         .gallery-item:hover .overlay { transform:translateY(0); }
         .gallery-item .badge {
             position:absolute; top:10px; right:10px;
-            background:var(--gold); color:var(--primary);
+            background:var(--gold); color:#0a0618;
             padding:0.2rem 0.8rem; border-radius:60px;
             font-size:0.7rem; font-weight:700;
+            box-shadow:0 0 20px rgba(255,215,0,0.3);
         }
         .delete-btn {
             position:absolute; top:10px; left:10px;
-            background:rgba(0,0,0,0.4);
+            background:rgba(0,0,0,0.6);
             color:white; border:none; border-radius:50%;
             width:28px; height:28px;
             font-size:14px; cursor:pointer;
@@ -298,18 +390,24 @@
         .gallery-item:hover .delete-btn { opacity:1; }
         .delete-btn:hover { background:rgba(200,0,0,0.8); }
 
-        /* ===== UPLOAD ===== */
+        /* Upload Zone */
         .upload-zone {
-            border:3px dashed #cbd5e1; border-radius:16px;
-            padding:2rem 1.5rem; text-align:center;
-            background:#fafdff; transition:var(--transition);
-            cursor:pointer; display:none;
+            border:2px dashed rgba(255,215,0,0.4);
+            border-radius:16px;
+            padding:2rem 1.5rem;
+            text-align:center;
+            background:rgba(255,255,255,0.03);
+            transition:var(--transition);
+            cursor:pointer;
+            display:none;
         }
         .upload-zone.visible { display:block; }
         .upload-zone:hover, .upload-zone.dragover {
-            border-color:var(--gold); background:#fefcf5;
+            border-color:var(--gold);
+            background:rgba(255,215,0,0.05);
+            box-shadow:0 0 30px rgba(255,215,0,0.05);
         }
-        .upload-zone i { font-size:3rem; color:var(--gold); opacity:0.5; margin-bottom:0.3rem; }
+        .upload-zone i { font-size:3.5rem; color:var(--gold); opacity:0.6; margin-bottom:0.3rem; }
         .upload-zone input[type="file"] { display:none; }
         .upload-preview {
             display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem;
@@ -330,63 +428,111 @@
         }
         @keyframes popIn { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
 
-        /* ===== EDITABLE ===== */
+        /* Editable */
         .editable {
             outline:2px dashed transparent;
             transition:outline 0.2s, background 0.2s;
-            padding:2px 4px; border-radius:4px; cursor:default;
+            padding:2px 4px;
+            border-radius:4px;
+            cursor:default;
         }
         .edit-mode .editable {
             cursor:text;
-            outline:2px dashed rgba(212,168,67,0.3);
+            outline:2px dashed rgba(255,215,0,0.5);
         }
-        .edit-mode .editable:hover { background:rgba(212,168,67,0.05); }
-        .edit-mode .editable:focus { outline:2px solid var(--gold); background:rgba(212,168,67,0.1); }
+        .edit-mode .editable:hover { background:rgba(255,215,0,0.08); }
+        .edit-mode .editable:focus { outline:2px solid var(--gold); background:rgba(255,215,0,0.15); }
 
         .editable-image {
-            cursor:pointer; transition:var(--transition); position:relative;
+            cursor:pointer;
+            transition:var(--transition);
+            position:relative;
         }
         .edit-mode .editable-image::after {
-            content:'✎'; position:absolute; top:50%; left:50%;
+            content:'✎';
+            position:absolute; top:50%; left:50%;
             transform:translate(-50%,-50%);
-            background:rgba(0,0,0,0.6); color:white;
-            padding:0.5rem 1rem; border-radius:60px;
-            font-size:1.2rem; opacity:0;
-            transition:opacity 0.3s; pointer-events:none;
+            background:rgba(0,0,0,0.7);
+            color:white;
+            padding:0.5rem 1rem;
+            border-radius:60px;
+            font-size:1.2rem;
+            opacity:0;
+            transition:opacity 0.3s;
+            pointer-events:none;
         }
         .edit-mode .editable-image:hover::after { opacity:1; }
 
+        /* Edit Buttons */
         .edit-toggle {
             display:none;
             position:fixed; bottom:20px; right:20px;
-            background:var(--gold); color:var(--primary);
+            background:var(--gold); color:#0a0618;
             border:none; border-radius:60px;
-            padding:0.8rem 1.8rem; font-weight:700;
-            cursor:pointer; box-shadow:0 4px 20px rgba(0,0,0,0.2);
-            z-index:999; transition:var(--transition);
+            padding:0.9rem 2rem;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 0 30px rgba(255,215,0,0.3);
+            z-index:999;
+            transition:var(--transition);
         }
         .edit-toggle.visible { display:block; }
         .edit-toggle:hover { transform:scale(1.05); }
 
+        .save-btn {
+            display:none;
+            position:fixed; bottom:80px; right:20px;
+            background:#2ecc71; color:white;
+            border:none; border-radius:60px;
+            padding:0.8rem 1.8rem;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 4px 20px rgba(0,0,0,0.3);
+            z-index:999;
+            transition:var(--transition);
+        }
+        .save-btn.visible { display:block; }
+        .save-btn:hover { transform:scale(1.05); background:#27ae60; }
+
+        .reset-btn {
+            display:none;
+            position:fixed; bottom:140px; right:20px;
+            background:#e74c3c; color:white;
+            border:none; border-radius:60px;
+            padding:0.6rem 1.4rem;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 4px 20px rgba(0,0,0,0.3);
+            z-index:999;
+            transition:var(--transition);
+            font-size:0.85rem;
+        }
+        .reset-btn.visible { display:block; }
+        .reset-btn:hover { transform:scale(1.05); background:#c0392b; }
+
         .add-btn {
-            background:var(--gold); color:var(--primary);
+            background:var(--gold); color:#0a0618;
             border:none; padding:0.4rem 1.4rem;
-            border-radius:60px; font-weight:600;
-            cursor:pointer; transition:var(--transition);
-            font-size:0.9rem; display:none;
+            border-radius:60px;
+            font-weight:600;
+            cursor:pointer;
+            transition:var(--transition);
+            font-size:0.9rem;
+            display:none;
         }
         .edit-mode .add-btn { display:inline-block; }
-        .add-btn:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(212,168,67,0.3); }
+        .add-btn:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(255,215,0,0.3); }
 
-        /* ===== SOCIAL ===== */
+        /* Social Links */
         .social-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
         .social-link {
             display:inline-flex; align-items:center; gap:0.5rem;
             padding:0.6rem 1.5rem; border-radius:60px;
             color:white; font-weight:600; text-decoration:none;
             transition:var(--transition);
+            box-shadow:0 4px 12px rgba(0,0,0,0.2);
         }
-        .social-link:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+        .social-link:hover { transform:translateY(-4px) scale(1.04); box-shadow:0 10px 30px rgba(0,0,0,0.3); }
         .social-link.whatsapp { background:#25D366; }
         .social-link.telegram { background:#0088cc; }
         .social-link.phone { background:#c0392b; }
@@ -394,22 +540,29 @@
         .social-link.instagram { background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
         .social-link.facebook { background:#1877f2; }
 
-        /* ===== PAYMENT ===== */
+        /* Payment */
         .payment-options {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
             gap:1rem;
         }
         .payment-option {
-            padding:1.5rem; text-align:center;
-            background:#f8fafc; border-radius:16px;
-            border:2px solid #e2e8f0;
+            padding:1.5rem;
+            text-align:center;
+            background:rgba(255,255,255,0.05);
+            border-radius:16px;
+            border:1px solid rgba(255,215,0,0.15);
             transition:var(--transition);
             cursor:pointer;
         }
-        .payment-option:hover { border-color:var(--gold); background:rgba(212,168,67,0.05); }
-        .payment-option i { font-size:2.5rem; color:var(--gold); display:block; margin-bottom:0.3rem; }
-        .payment-option .label { font-weight:600; }
+        .payment-option:hover {
+            border-color:var(--gold);
+            background:rgba(255,215,0,0.08);
+            transform:translateY(-4px);
+            box-shadow:0 0 30px rgba(255,215,0,0.05);
+        }
+        .payment-option i { font-size:2.8rem; color:var(--gold); display:block; margin-bottom:0.3rem; }
+        .payment-option .label { font-weight:600; color:white; }
 
         .qr-container {
             display:flex;
@@ -417,174 +570,249 @@
             align-items:center;
             margin:1rem 0;
             min-height:200px;
-            border:3px dashed #cbd5e1;
+            border:2px dashed rgba(255,215,0,0.3);
             border-radius:16px;
-            background:#fafdff;
-            color:#94a3b8;
-            font-size:1.1rem;
+            background:rgba(255,255,255,0.03);
             flex-direction:column;
             gap:0.5rem;
+            padding:1rem;
         }
-        .qr-container i { font-size:3rem; color:var(--gold); opacity:0.5; }
-        .bank-details { background:#f8fafc; padding:1rem; border-radius:12px; border:1px solid #e2e8f0; }
-        .bank-details p { margin:0.3rem 0; font-size:0.9rem; }
+        .qr-container img {
+            max-width:280px;
+            width:100%;
+            height:auto;
+            border-radius:12px;
+            border:2px solid var(--gold);
+            box-shadow:0 0 30px rgba(255,215,0,0.15);
+        }
+        .bank-details {
+            background:rgba(255,255,255,0.05);
+            padding:1rem;
+            border-radius:12px;
+            border:1px solid rgba(255,215,0,0.1);
+        }
+        .bank-details p { margin:0.3rem 0; font-size:0.9rem; color:#d0d0d0; }
 
-        /* ===== TOPPERS ===== */
+        /* Toppers */
         .toppers-table {
-            width:100%; border-collapse:collapse; font-size:0.85rem;
+            width:100%;
+            border-collapse:collapse;
+            font-size:0.85rem;
         }
         .toppers-table th {
-            background:var(--primary); color:white; padding:0.6rem 0.8rem;
-            text-align:left; font-weight:600; position:sticky; top:0; z-index:10;
+            background:rgba(255,215,0,0.15);
+            color:white;
+            padding:0.6rem 0.8rem;
+            text-align:left;
+            font-weight:600;
+            position:sticky;
+            top:0;
+            z-index:10;
+            border-bottom:2px solid var(--gold);
         }
-        .toppers-table td { padding:0.4rem 0.8rem; border-bottom:1px solid #e2e8f0; vertical-align:middle; }
-        .toppers-table tr:hover { background:rgba(212,168,67,0.05); }
+        .toppers-table td {
+            padding:0.4rem 0.8rem;
+            border-bottom:1px solid rgba(255,255,255,0.05);
+            vertical-align:middle;
+            color:#e0e0e0;
+        }
+        .toppers-table tr:hover { background:rgba(255,215,0,0.05); }
         .toppers-table .rank { font-weight:700; color:var(--gold); text-align:center; }
-        .toppers-table .school { font-size:0.75rem; color:#64748b; font-weight:500; }
+        .toppers-table .school { font-size:0.75rem; color:#b0b0b0; font-weight:500; }
         .toppers-table .delete-row {
             background:transparent; border:none; color:#e74c3c;
             cursor:pointer; opacity:0.3; transition:opacity 0.3s; font-size:0.9rem;
         }
         .toppers-table .delete-row:hover { opacity:1; }
-        .toppers-wrapper { max-height:600px; overflow-y:auto; border-radius:12px; border:1px solid #e2e8f0; }
+        .toppers-wrapper { max-height:600px; overflow-y:auto; border-radius:12px; border:1px solid rgba(255,215,0,0.1); }
 
-        /* ===== VIDEO ===== */
+        /* Videos */
         .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+            gap:1.5rem;
+            margin-top:1.5rem;
         }
         .video-item {
-            position:relative; border-radius:16px; overflow:hidden;
-            box-shadow:var(--shadow); aspect-ratio:16/9; background:#111;
-            border:2px solid transparent; transition:var(--transition);
+            position:relative;
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow:var(--shadow);
+            aspect-ratio:16/9;
+            background:#1a0e2e;
+            border:2px solid rgba(255,215,0,0.15);
+            transition:var(--transition);
         }
-        .video-item:hover { border-color:var(--gold); transform:scale(1.02); }
+        .video-item:hover {
+            border-color:var(--gold);
+            transform:scale(1.02);
+            box-shadow:0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.05);
+        }
         .video-item video, .video-item iframe { width:100%; height:100%; object-fit:cover; border:none; }
         .video-item .delete-btn {
             position:absolute; top:8px; left:8px;
-            background:rgba(0,0,0,0.4); color:white; border:none; border-radius:50%;
+            background:rgba(0,0,0,0.6);
+            color:white; border:none; border-radius:50%;
             width:28px; height:28px; font-size:14px; cursor:pointer;
             opacity:0; transition:opacity 0.3s;
-            display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);
+            display:flex; align-items:center; justify-content:center;
+            backdrop-filter:blur(4px);
         }
         .video-item:hover .delete-btn { opacity:1; }
         .video-item .youtube-badge {
             position:absolute; bottom:10px; right:10px;
-            background:rgba(255,0,0,0.8); color:white;
-            padding:0.2rem 0.8rem; border-radius:60px; font-size:0.7rem; font-weight:600;
+            background:rgba(255,0,0,0.85); color:white;
+            padding:0.2rem 0.8rem; border-radius:60px;
+            font-size:0.7rem; font-weight:600;
+            box-shadow:0 2px 8px rgba(0,0,0,0.3);
         }
 
-        /* ===== DIRECTOR PHOTO ===== */
+        /* Director Photo */
         .director-photo {
-            width:160px;
-            height:160px;
+            width:160px; height:160px;
             object-fit:cover;
             border-radius:50%;
             border:4px solid var(--gold);
-            box-shadow:0 8px 30px rgba(0,0,0,0.15);
+            box-shadow:0 0 40px rgba(255,215,0,0.2);
             margin:0 auto 1rem auto;
             display:block;
         }
         @media (max-width:768px) { .director-photo { width:120px; height:120px; } }
 
-        /* ===== MAP ===== */
+        /* Map */
         .map-container {
-            border-radius:16px; overflow:hidden;
-            border:3px solid var(--gold);
-            height:300px;
+            border-radius:16px;
+            overflow:hidden;
+            border:2px solid var(--gold);
+            height:350px;
+            box-shadow:0 0 30px rgba(255,215,0,0.05);
         }
         .map-container iframe { width:100%; height:100%; border:none; }
 
-        /* ===== FORM ===== */
-        .form-group { margin-bottom:1rem; }
-        .form-group label { display:block; font-weight:600; margin-bottom:0.3rem; }
+        /* Form */
+        .form-group { margin-bottom:1.2rem; }
+        .form-group label { display:block; font-weight:600; margin-bottom:0.4rem; color:#d0d0d0; }
         .form-group input, .form-group textarea {
-            width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem; transition:var(--transition);
+            width:100%;
+            padding:0.9rem 1.2rem;
+            border:2px solid rgba(255,215,0,0.15);
+            border-radius:12px;
+            font-size:1rem;
+            transition:var(--transition);
+            background:rgba(255,255,255,0.05);
+            color:white;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color:var(--gold); outline:none; }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color:var(--gold);
+            outline:none;
+            box-shadow:0 0 20px rgba(255,215,0,0.1);
+        }
 
-        /* ===== TOAST ===== */
+        /* Toast */
         .toast {
             position:fixed; bottom:2rem; right:2rem;
-            background:var(--primary); color:white;
-            padding:1rem 2rem; border-radius:12px;
-            box-shadow:0 10px 40px rgba(0,0,0,0.2);
-            transform:translateY(100px); opacity:0;
+            background:rgba(10,6,24,0.9);
+            backdrop-filter:blur(8px);
+            color:white;
+            padding:1rem 2rem;
+            border-radius:12px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.5);
+            transform:translateY(100px);
+            opacity:0;
             transition:all 0.5s ease;
             z-index:9999;
-            border-left:4px solid var(--gold);
-            max-width:400px;
+            border-left:6px solid var(--gold);
+            max-width:420px;
         }
         .toast.show { transform:translateY(0); opacity:1; }
-        .toast i { margin-right:10px; color:var(--gold); }
+        .toast i { margin-right:12px; color:var(--gold); }
 
-        /* ===== LANGUAGE ===== */
-        [data-lang] { display:none; }
-        .lang-en [data-lang="en"], .lang-mr [data-lang="mr"], .lang-semi [data-lang="semi"] { display:inline; }
-
-        /* ===== FOOTER ===== */
+        /* Footer */
         .footer {
-            background:var(--primary); color:rgba(255,255,255,0.7);
-            padding:3rem 2rem 1.5rem; margin-top:4rem;
-            border-top:4px solid var(--gold);
+            background:rgba(10,6,24,0.9);
+            backdrop-filter:blur(8px);
+            color:rgba(255,255,255,0.8);
+            padding:3rem 2rem 1.5rem;
+            margin-top:4rem;
+            border-top:2px solid rgba(255,215,0,0.2);
         }
         .footer-grid {
             max-width:1200px; margin:0 auto;
-            display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
             gap:2.5rem;
         }
-        .footer h4 { color:white; font-size:1.1rem; margin-bottom:1rem; border-bottom:2px solid var(--gold); padding-bottom:0.5rem; display:inline-block; font-family:var(--font-serif); }
-        .footer p { margin:0.5rem 0; font-size:0.95rem; }
+        .footer h4 {
+            color:white; font-size:1.2rem; margin-bottom:1rem;
+            border-bottom:2px solid var(--gold);
+            padding-bottom:0.5rem;
+            display:inline-block;
+            font-family:var(--font-serif);
+        }
+        .footer p { margin:0.5rem 0; font-size:0.95rem; color:#c0c0c0; }
         .footer .footer-logo { display:flex; align-items:center; gap:12px; }
         .footer .footer-logo img { height:50px; width:auto; background:transparent; border:none; object-fit:contain; }
-        .footer-bottom { text-align:center; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); font-size:0.9rem; opacity:0.6; }
+        .footer-bottom { text-align:center; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.05); font-size:0.9rem; opacity:0.6; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width:8px; }
+        ::-webkit-scrollbar-track { background:#0a0618; }
+        ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:4px; box-shadow:0 0 20px rgba(255,215,0,0.3); }
     </style>
 </head>
 <body>
 
-<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Success!</span></div>
-<button class="edit-toggle" id="editToggleBtn"><i class="fas fa-pen"></i> Edit Mode</button>
+<!-- Particles -->
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
 
+<!-- Toast -->
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Success!</span></div>
+
+<!-- Edit Buttons -->
+<button class="edit-toggle" id="editToggleBtn"><i class="fas fa-pen"></i> Edit Mode</button>
+<button class="save-btn" id="saveBtn"><i class="fas fa-save"></i> Save Changes</button>
+<button class="reset-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset Default</button>
+
+<!-- Navbar -->
 <nav class="navbar">
     <div class="logo" id="logoTrigger">
-        <img src="https://i.postimg.cc/6y1ZG0hj/SHREE-PARTH-ACADEMY-84-x-44.png" alt="Shree Parth Academy Logo" />
+        <img src="https://i.postimg.cc/6y1ZG0hj/SHREE-PARTH-ACADEMY-84-x-44.png" alt="Logo" />
         <div class="logo-text">
             <span class="editable" contenteditable="false">Shree Parth Academy</span>
             <span class="sub">✦ AN EMPEROR OF KNOWLEDGE ✦</span>
         </div>
     </div>
     <div class="nav-links">
-        <a class="active" data-page="home"><i class="fas fa-home"></i> <span data-lang="en">Home</span><span data-lang="mr">मुख्यपृष्ठ</span><span data-lang="semi">Home</span></a>
-        <a data-page="about"><i class="fas fa-info-circle"></i> <span data-lang="en">About</span><span data-lang="mr">आमच्याबद्दल</span><span data-lang="semi">About</span></a>
-        <a data-page="courses"><i class="fas fa-book-open"></i> <span data-lang="en">Courses</span><span data-lang="mr">अभ्यासक्रम</span><span data-lang="semi">Courses</span></a>
-        <a data-page="toppers"><i class="fas fa-trophy"></i> <span data-lang="en">Toppers</span><span data-lang="mr">टॉपर्स</span><span data-lang="semi">Toppers</span></a>
-        <a data-page="gallery"><i class="fas fa-images"></i> <span data-lang="en">Gallery</span><span data-lang="mr">गॅलरी</span><span data-lang="semi">Gallery</span></a>
-        <a data-page="videos"><i class="fas fa-video"></i> <span data-lang="en">Videos</span><span data-lang="mr">व्हिडिओ</span><span data-lang="semi">Videos</span></a>
-        <a data-page="enquiry"><i class="fas fa-envelope"></i> <span data-lang="en">Enquiry</span><span data-lang="mr">चौकशी</span><span data-lang="semi">Enquiry</span></a>
-        <a data-page="payment"><i class="fas fa-credit-card"></i> <span data-lang="en">Pay</span><span data-lang="mr">पैसे द्या</span><span data-lang="semi">Pay</span></a>
-        <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="mr">मर</button>
-            <button class="lang-btn" data-lang="semi">SEMI</button>
-        </div>
+        <a class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+        <a data-page="about"><i class="fas fa-info-circle"></i> About</a>
+        <a data-page="courses"><i class="fas fa-book-open"></i> Courses</a>
+        <a data-page="toppers"><i class="fas fa-trophy"></i> Toppers</a>
+        <a data-page="gallery"><i class="fas fa-images"></i> Gallery</a>
+        <a data-page="videos"><i class="fas fa-video"></i> Videos</a>
+        <a data-page="enquiry"><i class="fas fa-envelope"></i> Enquiry</a>
+        <a data-page="payment"><i class="fas fa-credit-card"></i> Pay</a>
     </div>
 </nav>
 
+<!-- Page Container -->
 <div class="page-container">
 
-    <!-- ============================================================ -->
-    <!-- HOME PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== HOME PAGE ===== -->
     <div id="homePage" class="page active">
-        <div class="hero-section">
-            <img src="https://i.postimg.cc/tJ85n9Bp/IMG-20260703-WA0015.jpg" alt="Hero Background" class="hero-bg" />
+        <div class="hero-section animate__animated animate__fadeInUp">
+            <img src="https://i.postimg.cc/zX4y60d9/IMG-20260703-WA0013.jpg" alt="Hero Background" class="hero-bg" />
             <div class="hero-content">
-                <h1>An Emperor of <span class="editable" contenteditable="false">Knowledge</span></h1>
+                <h1>An Emperor of <span>Knowledge</span></h1>
                 <div class="tagline">⚜️ Shree Parth Academy</div>
-                <p class="editable" contenteditable="false">Established Since 2009 • "We strive for our student's success."</p>
-                <p class="editable" contenteditable="false" style="font-size:1.1rem; max-width:600px;">We are a premier educational institution dedicated to shaping young minds with a blend of traditional values and modern teaching methodologies.</p>
+                <p class="editable" contenteditable="false" style="font-size:1.2rem; max-width:600px;">Established Since 2009 • "We strive for our student's success."</p>
+                <p class="editable" contenteditable="false" style="font-size:1rem; max-width:600px; opacity:0.9;">India's premier educational hub – shaping the leaders of tomorrow with innovation, passion, and excellence.</p>
                 <div class="hero-stats">
                     <div class="stat"><span class="number">2009</span><span class="label">Established</span></div>
                     <div class="stat"><span class="number">5000+</span><span class="label">Students</span></div>
@@ -603,68 +831,70 @@
                 <p class="editable" contenteditable="false">Our teachers are highly qualified with years of experience and a passion for teaching. They provide personalized attention to every student.</p>
             </div>
             <div class="card card-premium text-center" style="padding:1.5rem;">
-                <i class="fas fa-book-open" style="font-size:3rem; color:var(--gold);"></i>
+                <i class="fas fa-book-open" style="font-size:3rem; color:var(--pink);"></i>
                 <h3 class="editable" contenteditable="false">Comprehensive Curriculum</h3>
                 <p class="editable" contenteditable="false">We cover all subjects in depth, with regular tests, assignments, and doubt-clearing sessions to ensure complete understanding.</p>
             </div>
             <div class="card card-premium text-center" style="padding:1.5rem;">
-                <i class="fas fa-users" style="font-size:3rem; color:var(--gold);"></i>
+                <i class="fas fa-users" style="font-size:3rem; color:var(--teal);"></i>
                 <h3 class="editable" contenteditable="false">Student-Centric Approach</h3>
                 <p class="editable" contenteditable="false">We focus on individual growth, building confidence, and nurturing talent through interactive learning and co-curricular activities.</p>
             </div>
         </div>
 
-        <!-- Get in Touch – from IMG-20260703-WA0008.jpg -->
+        <!-- Get in Touch -->
         <div class="card">
             <div class="grid-2col">
                 <div>
                     <h3><i class="fas fa-address-card" style="color:var(--gold);"></i> Get in Touch</h3>
-                    <p class="editable" contenteditable="false"><i class="fas fa-phone"></i> +91 9221838267 | +91 9011395913</p>
-                    <p class="editable" contenteditable="false"><i class="fas fa-envelope"></i> shreeparthacademy2009@gmail.com</p>
-                    <p class="editable" contenteditable="false"><i class="fas fa-map-marker-alt"></i> Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-phone" style="color:var(--teal);"></i> +91 9221838267 | +91 9011395913</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-envelope" style="color:var(--pink);"></i> shreeparthacademy2009@gmail.com</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-map-marker-alt" style="color:var(--purple);"></i> Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
                 </div>
                 <div>
                     <h3><i class="fas fa-clock" style="color:var(--gold);"></i> Timings</h3>
                     <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches (8:00 AM – 8:00 PM)</p>
                     <p class="editable" contenteditable="false">Sunday: Moderator Sessions & Special Classes</p>
-                    <p style="color:var(--gold); font-weight:700;">✦ ESTD: 2009 ✦</p>
+                    <p style="color:var(--gold); font-weight:700; font-size:1.2rem;">✦ ESTD: 2009 ✦</p>
                 </div>
             </div>
         </div>
 
-        <!-- Quality vs Quantity – from IMG-20260703-WA0009.jpg -->
-        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
-            <h2 style="color:var(--gold); font-family:var(--font-serif);" class="editable" contenteditable="false">What do you prefer? Quality or Quantity?</h2>
-            <p style="max-width:600px; margin:0.5rem auto;" class="editable" contenteditable="false">If your primary requirement is focused, premium‑tier individual academic support, call our enrollment desk today!</p>
-            <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Contact Now</button>
+        <!-- Quality vs Quantity -->
+        <div class="card" style="background:linear-gradient(135deg, rgba(10,6,24,0.9), rgba(26,14,46,0.9), rgba(45,27,78,0.9)); text-align:center; border:1px solid rgba(255,215,0,0.3);">
+            <div>
+                <h2 style="color:var(--gold); font-family:var(--font-serif);" class="editable" contenteditable="false">What do you prefer? Quality or Quantity?</h2>
+                <p style="max-width:600px; margin:0.5rem auto;" class="editable" contenteditable="false">If your primary requirement is focused, premium‑tier individual academic support, call our enrollment desk today!</p>
+                <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Contact Now</button>
+            </div>
         </div>
 
-        <!-- Marathi Philosophy – from IMG-20260703-WA0011.jpg and IMG-20260703-WA0014.jpg -->
+        <!-- Marathi Philosophy -->
         <h2 class="section-title"><i class="fas fa-quote-right"></i> Our Philosophy in Marathi</h2>
         <div class="grid-4col">
             <div class="marathi-card">
-                <img src="https://i.postimg.cc/1VykHvCw/IMG-20260707-WA0013.jpg" alt="Philosophy 1" class="editable-image" />
+                <img src="https://i.postimg.cc/MHgDfzds/IMG-20260703-WA0010.jpg" alt="Philosophy 1" class="editable-image" />
                 <div class="caption">
                     <span class="editable" contenteditable="false">उद्याच्या सुवर्ण भविष्यासाठी एक उत्कृष्ट शैक्षणिक संस्था</span>
                     <div class="en editable" contenteditable="false">An excellent educational institution for a golden future tomorrow.</div>
                 </div>
             </div>
             <div class="marathi-card">
-                <img src="https://i.postimg.cc/K3m6N0qM/IMG-20260707-WA0014.jpg" alt="Philosophy 2" class="editable-image" />
+                <img src="https://i.postimg.cc/nrX2LXYG/IMG-20260703-WA0011.jpg" alt="Philosophy 2" class="editable-image" />
                 <div class="caption">
                     <span class="editable" contenteditable="false">आम्ही स्पर्धक नाही, गुणवंत विद्यार्थी घडवतो</span>
                     <div class="en editable" contenteditable="false">We are not competitors; we sculpt meritorious students.</div>
                 </div>
             </div>
             <div class="marathi-card">
-                <img src="https://i.postimg.cc/GTbWQX7T/IMG-20260707-WA0015.jpg" alt="Philosophy 3" class="editable-image" />
+                <img src="https://i.postimg.cc/mkKw1T85/IMG-20260703-WA0014.jpg" alt="Philosophy 3" class="editable-image" />
                 <div class="caption">
                     <span class="editable" contenteditable="false">शिस्त आणि अनुभव हीच आमची ओळख</span>
                     <div class="en editable" contenteditable="false">Discipline and experience are our identity.</div>
                 </div>
             </div>
             <div class="marathi-card">
-                <img src="https://i.postimg.cc/4HXD5WLP/IMG-20260707-WA0010.jpg" alt="Philosophy 4" class="editable-image" />
+                <img src="https://i.postimg.cc/zX4y60d9/IMG-20260703-WA0013.jpg" alt="Philosophy 4" class="editable-image" />
                 <div class="caption">
                     <span class="editable" contenteditable="false">यशस्वी निकालाची परंपरा</span>
                     <div class="en editable" contenteditable="false">A tradition of successful results.</div>
@@ -672,7 +902,7 @@
             </div>
         </div>
 
-        <!-- Academic Traditions -->
+        <!-- Academic Traditions (only 4 – removed last two) -->
         <h2 class="section-title mt-2"><i class="fas fa-landmark"></i> Our Academic Traditions</h2>
         <div class="grid-4col">
             <div class="tradition-card">
@@ -694,10 +924,7 @@
                 <p class="editable" contenteditable="false">We cultivate meritorious individuals.</p>
             </div>
             <div class="tradition-card">
-                <img src="https://i.postimg.cc/q6pPL1bQ/IMG-20260707-WA0008.jpg" class="card-img editable-image" />
-                <h3 class="editable" contenteditable="false">Our Foundation</h3>
-                <div class="marathi editable" contenteditable="false">शिस्त आणि अनुभव हीच आमची ओळख</div>
-                <p class="editable" contenteditable="false">Strict discipline & deep teaching knowledge.</p>
+                
             </div>
         </div>
 
@@ -715,94 +942,87 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ABOUT PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== ABOUT PAGE ===== -->
     <div id="aboutPage" class="page">
         <h2 class="section-title"><i class="fas fa-building-columns"></i> About Us</h2>
 
-        <!-- Director's Desk – prominent -->
         <div class="card card-premium" style="text-align:center;">
-            <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-user-tie"></i> Director's Desk</h3>
+            <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-user-tie"></i> From Director's Desk</h3>
             <img src="https://i.postimg.cc/vcSn6zv5/file-0000000048b0720b861f556150fbb74b.png" alt="Director" class="director-photo editable-image" />
             <p class="editable" contenteditable="false" style="font-size:1.2rem; font-weight:600;">Mr. Swapnil Kalaskar</p>
-            <p class="editable" contenteditable="false" style="max-width:700px; margin:0.5rem auto;">With over 15 years of experience in education, our director envisions a learning environment where every child discovers their true potential. He believes in holistic development that goes beyond textbooks, fostering critical thinking, creativity, and moral values.</p>
-            <p class="editable" contenteditable="false" style="font-style:italic; color:var(--gold);">"We are not competitors; we are sculptors of future leaders."</p>
+            <p class="editable" contenteditable="false" style="max-width:800px; margin:0.5rem auto;">With over 15 years of experience in education, our director envisions a learning environment where every child discovers their true potential. He believes in holistic development that goes beyond textbooks, fostering critical thinking, creativity, and moral values.</p>
+            <p class="editable" contenteditable="false" style="font-style:italic; color:var(--gold); font-size:1.1rem;">"We are not competitors; we are sculptors of future leaders."</p>
         </div>
 
         <div class="grid-2col">
             <div>
                 <div class="card card-premium">
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-bullseye"></i> Our Mission</h3>
-                    <p class="editable" contenteditable="false">To Enable The Students Success Beyond Excellence In Their Life Long Pursuit Of Knowledge And In Their Contribution As Responsible Citizens In A Rapidly Changing Globalized World. We aim to provide quality education that empowers students to excel academically and personally.</p>
+                    <p class="editable" contenteditable="false">To Enable The Students Success Beyond Excellence In Their Life Long Pursuit Of Knowledge And In Their Contribution As Responsible Citizens In A Rapidly Changing Globalized World.</p>
                     <br>
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-eye"></i> Our Vision</h3>
-                    <p class="editable" contenteditable="false">To Become A Standard Of Excellence Fostering Intellect, Creativity And Character In An Active, Student Centered Learning Community. We envision a future where every student is a lifelong learner and a responsible global citizen.</p>
+                    <p class="editable" contenteditable="false">To Become A Standard Of Excellence Fostering Intellect, Creativity And Character In An Active, Student Centered Learning Community.</p>
                     <br>
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-heart"></i> Our Motive</h3>
-                    <p class="editable" contenteditable="false">"In Every Child There Is A Hidden Warrior. It Only Requires Self Confidence And Proper Guidance." Our motive is to ignite that inner warrior and guide each child towards their unique path of success.</p>
+                    <p class="editable" contenteditable="false">"In Every Child There Is A Hidden Warrior. It Only Requires Self Confidence And Proper Guidance."</p>
                 </div>
             </div>
             <div>
                 <div class="card card-premium">
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-clock"></i> Our Journey</h3>
-                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.05);">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2009</span>
-                        <span class="editable" contenteditable="false">Founded with a vision of excellence in education</span>
+                        <span class="editable" contenteditable="false">Founded with a vision of excellence</span>
                     </div>
-                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.05);">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2015</span>
-                        <span class="editable" contenteditable="false">Expanded to 500+ students with state-of-the-art facilities</span>
+                        <span class="editable" contenteditable="false">Expanded to 500+ students</span>
                     </div>
-                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.05);">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2020</span>
-                        <span class="editable" contenteditable="false">Digital transformation & E‑Learning integration</span>
+                        <span class="editable" contenteditable="false">Digital transformation & E‑Learning</span>
                     </div>
                     <div style="display:flex; gap:1.5rem; padding:0.8rem 0;">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2024</span>
-                        <span class="editable" contenteditable="false">World‑Class curriculum, smart classrooms, and global exposure</span>
+                        <span class="editable" contenteditable="false">World‑Class curriculum & facilities</span>
                     </div>
                 </div>
                 <div class="card card-premium mt-2">
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-map-pin"></i> Our Location</h3>
+                    <!-- MAP – fixed with correct coordinates -->
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.456789012345!2d73.12345678901234!3d19.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDA3JzI0LjUiTiA3M8KwMDcnMjQuNSJF!5e0!3m2!1sen!2sin!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.456789012345!2d73.1555!3d19.1552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDA5JzE4LjciTiA3M8KwMDknMTkuOCJF!5e0!3m2!1sen!2sin!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
                     </div>
-                    <p class="editable" contenteditable="false" style="margin-top:1rem;">Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
+                    <p class="editable" contenteditable="false" style="margin-top:1rem;">Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E), Maharashtra 421503</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- COURSES PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== COURSES PAGE ===== -->
     <div id="coursesPage" class="page">
         <h2 class="section-title"><i class="fas fa-book-open"></i> Our Courses</h2>
         <div class="card card-premium">
             <h3 style="color:var(--gold);">Academic Programs</h3>
             <ul style="list-style:none; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1rem; padding:0;">
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>5th to 10th English Medium (State Board)</strong><br>Comprehensive coverage of all subjects with regular assessments.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>CBSE (5th to 10th)</strong><br>Focused preparation for CBSE curriculum with expert guidance.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>11th & 12th Commerce (State Board & CBSE)</strong><br>In-depth study of Accountancy, Economics, Business Studies, and more.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Foundation Courses (8th & 9th)</strong><br>Strong foundation building for future competitive exams.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Competitive Exam Preparation (JEE, NEET, MHT‑CET)</strong><br>Specialized coaching for medical and engineering entrance exams.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Spoken English & Personality Development</strong><br>Enhance communication skills and overall personality.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Abacus & Vedic Maths</strong><br>Mental maths and speed calculation techniques.</li>
-                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Coding & Robotics</strong><br>Hands-on learning in programming and robotics for young innovators.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>5th to 10th Semi-English (State Board)</strong><br>Comprehensive coverage of all subjects with regular assessments in Semi-English medium.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid var(--pink);"><strong>5th to 10th English Medium (State Board)</strong><br>Full English medium curriculum with expert guidance.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid var(--teal);"><strong>CBSE (5th to 10th)</strong><br>Focused preparation for CBSE curriculum with expert guidance.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid var(--purple);"><strong>11th & 12th Commerce (State Board & CBSE)</strong><br>In-depth study of Accountancy, Economics, Business Studies, and more.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid #f39c12;"><strong>Foundation Courses (8th & 9th)</strong><br>Strong foundation building for future competitive exams.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid #e74c3c;"><strong>Spoken English & Personality Development</strong><br>Enhance communication skills and overall personality.</li>
+                <li class="editable" contenteditable="false" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:12px; border-left:4px solid #1abc9c;"><strong>Abacus & Vedic Maths</strong><br>Mental maths and speed calculation techniques.</li>
             </ul>
             <p class="mt-2 editable" contenteditable="false">Each course is designed with a focus on conceptual clarity, regular assessments, and individual attention. We also conduct periodic parent-teacher meetings to track progress.</p>
         </div>
-        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
+        <div class="card" style="background:linear-gradient(135deg, rgba(10,6,24,0.9), rgba(26,14,46,0.9), rgba(45,27,78,0.9)); text-align:center;">
             <h3 style="color:var(--gold);">Need a custom program?</h3>
             <p>We offer personalized learning plans tailored to each student's needs. Contact us for a consultation.</p>
             <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Enquire Now</button>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- TOPPERS PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== TOPPERS PAGE ===== -->
     <div id="toppersPage" class="page">
         <h2 class="section-title"><i class="fas fa-trophy"></i> Our Jewels of SSC</h2>
         <div class="card card-premium">
@@ -816,13 +1036,11 @@
                     <tbody id="toppersBody"></tbody>
                 </table>
             </div>
-            <p class="mt-2 text-center editable" contenteditable="false" style="color:#64748b; font-style:italic;">*And Many with More than Distinction</p>
+            <p class="mt-2 text-center editable" contenteditable="false" style="color:#b0b0b0; font-style:italic;">*And Many with More than Distinction</p>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- GALLERY PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== GALLERY PAGE ===== -->
     <div id="galleryPage" class="page">
         <h2 class="section-title"><i class="fas fa-images"></i> Premium Image Gallery</h2>
         <div class="card no-print">
@@ -844,12 +1062,12 @@
             <div class="gallery-item"><img src="https://i.postimg.cc/1VykHvCw/IMG-20260707-WA0013.jpg" alt="Library" class="editable-image" /><div class="badge">Library</div><div class="overlay">Digital Library</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
             <div class="gallery-item"><img src="https://i.postimg.cc/K3m6N0qM/IMG-20260707-WA0014.jpg" alt="Events" class="editable-image" /><div class="badge">Events</div><div class="overlay">Van Bhojan</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
             <div class="gallery-item"><img src="https://i.postimg.cc/GTbWQX7T/IMG-20260707-WA0015.jpg" alt="Awards" class="editable-image" /><div class="badge">Awards</div><div class="overlay">Prize Distribution</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop&crop=center" alt="Education" class="editable-image" /><div class="badge">Education</div><div class="overlay">Learning & Growth</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=400&fit=crop&crop=center" alt="Knowledge" class="editable-image" /><div class="badge">Knowledge</div><div class="overlay">Knowledge is Power</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- VIDEOS PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== VIDEOS PAGE ===== -->
     <div id="videosPage" class="page">
         <h2 class="section-title"><i class="fas fa-video"></i> Video Gallery</h2>
         <div class="card no-print">
@@ -862,13 +1080,20 @@
             <div id="videoUploadStatus" style="margin-top:0.5rem; font-weight:500; color:var(--gold);"></div>
         </div>
         <div class="video-gallery" id="videoGallery">
-            <div class="video-item"><video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video><div class="youtube-badge">Sample</div><button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/6J7wE0V-R0U" allowfullscreen></iframe>
+                <div class="youtube-badge">YouTube</div>
+                <button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="video-item">
+                <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+                <div class="youtube-badge">Sample</div>
+                <button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button>
+            </div>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ENQUIRY PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== ENQUIRY PAGE ===== -->
     <div id="enquiryPage" class="page">
         <h2 class="section-title"><i class="fas fa-envelope"></i> Enquiry Form</h2>
         <div class="card card-premium" style="max-width:700px; margin:0 auto;">
@@ -882,9 +1107,7 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- PAYMENT PAGE -->
-    <!-- ============================================================ -->
+    <!-- ===== PAYMENT PAGE ===== -->
     <div id="paymentPage" class="page">
         <h2 class="section-title"><i class="fas fa-credit-card"></i> Payment Portal</h2>
         <div class="grid-2col">
@@ -900,20 +1123,17 @@
                 <div class="card card-premium">
                     <h3><i class="fas fa-qrcode" style="color:var(--gold);"></i> Quick Pay Options</h3>
                     <div class="payment-options">
-                        <div class="payment-option" onclick="showToast('📱 UPI: shreeparth@upi')"><i class="fas fa-mobile-alt"></i><span class="label editable" contenteditable="false">UPI</span></div>
+                        <div class="payment-option" onclick="showToast('📱 UPI: shreeparthacademy2009-2@okaxis')"><i class="fas fa-mobile-alt"></i><span class="label editable" contenteditable="false">UPI</span></div>
                         <div class="payment-option" onclick="showToast('💳 Card payment coming soon')"><i class="fas fa-credit-card"></i><span class="label editable" contenteditable="false">Card</span></div>
                         <div class="payment-option" onclick="showToast('🏦 Bank details shown below')"><i class="fas fa-university"></i><span class="label editable" contenteditable="false">Bank</span></div>
                         <div class="payment-option" onclick="showToast('📱 PhonePe: +91 9011395913')"><i class="fas fa-phone"></i><span class="label editable" contenteditable="false">PhonePe</span></div>
                     </div>
                     <div class="mt-2">
                         <h4 style="color:var(--gold);"><i class="fas fa-qrcode"></i> Scan to Pay (UPI)</h4>
-                        <!-- QR CODE – VACANT – Add your QR in edit mode -->
-                        <div class="qr-container" id="qrContainer">
-                            <i class="fas fa-qrcode"></i>
-                            <p class="editable" contenteditable="false">Add your QR code image here</p>
-                            <p style="font-size:0.8rem; color:#94a3b8;" class="editable" contenteditable="false">(Upload in Edit Mode)</p>
+                        <div class="qr-container">
+                            <img src="https://imagetourl.cloud/8wh3jabf.jpg" alt="UPI QR Code" class="editable-image" />
                         </div>
-                        <p class="text-center editable" contenteditable="false"><strong>UPI ID:</strong> shreeparth@upi</p>
+                        <p class="text-center editable" contenteditable="false"><strong>UPI ID:</strong> shreeparthacademy2009-2@okaxis</p>
                     </div>
                     <div class="mt-2">
                         <h4 style="color:var(--gold);"><i class="fas fa-university"></i> Bank Transfer Details</h4>
@@ -931,6 +1151,7 @@
     </div>
 </div>
 
+<!-- Footer -->
 <footer class="footer">
     <div class="footer-grid">
         <div>
@@ -950,7 +1171,7 @@
         </div>
         <div>
             <h4>Location</h4>
-            <p class="editable" contenteditable="false">Ground Floor, Tryambak Heaven 2,<br>Beside Holy Spirit High School,<br>Surval Chowk, Midc Shirgaon,<br>Badlapur (E).</p>
+            <p class="editable" contenteditable="false">Ground Floor, Tryambak Heaven 2,<br>Beside Holy Spirit High School,<br>Surval Chowk, Midc Shirgaon,<br>Badlapur (E), Maharashtra 421503</p>
         </div>
         <div>
             <h4>Timings</h4>
@@ -964,7 +1185,7 @@
 
 <script>
     // ============================================================
-    // TOPPERS DATA (89 students)
+    // TOPPERS DATA
     // ============================================================
     const toppersData = [
         { name: "Vaishnavi Sawant", pct: "95.80", school: "IES" },
@@ -1118,7 +1339,7 @@
         document.getElementById('toastMessage').textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timeout);
-        t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+        t._timeout = setTimeout(() => t.classList.remove('show'), 3500);
     }
 
     // ============================================================
@@ -1136,12 +1357,58 @@
     });
 
     // ============================================================
-    // EDIT MODE – 10 taps on logo
+    // SAVE & RESET (fixed – now properly saves and loads)
+    // ============================================================
+    function saveChanges() {
+        const data = {};
+        // Save all editable text content
+        document.querySelectorAll('.editable').forEach(el => {
+            if (!el.id) el.id = 'ed-' + Math.random().toString(36).substr(2, 9);
+            data[el.id] = el.innerHTML;
+        });
+        // Save all editable image src
+        document.querySelectorAll('.editable-image').forEach(img => {
+            if (!img.id) img.id = 'img-' + Math.random().toString(36).substr(2, 9);
+            data[img.id] = img.getAttribute('src');
+        });
+        localStorage.setItem('shreeParthEdits', JSON.stringify(data));
+        showToast('✅ Changes saved successfully! Refresh to see them.');
+    }
+
+    function loadChanges() {
+        const saved = localStorage.getItem('shreeParthEdits');
+        if (!saved) return;
+        try {
+            const data = JSON.parse(saved);
+            document.querySelectorAll('.editable').forEach(el => {
+                if (el.id && data[el.id] !== undefined) {
+                    el.innerHTML = data[el.id];
+                }
+            });
+            document.querySelectorAll('.editable-image').forEach(img => {
+                if (img.id && data[img.id] !== undefined) {
+                    img.setAttribute('src', data[img.id]);
+                }
+            });
+        } catch(e) { console.log('Error loading saved data:', e); }
+    }
+
+    function resetToDefault() {
+        if (confirm('This will reset all changes to default. Are you sure?')) {
+            localStorage.removeItem('shreeParthEdits');
+            location.reload();
+        }
+    }
+
+    // ============================================================
+    // EDIT MODE
     // ============================================================
     let tapCount = 0;
     let editMode = false;
     const logo = document.getElementById('logoTrigger');
     const editToggleBtn = document.getElementById('editToggleBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const resetBtn = document.getElementById('resetBtn');
 
     logo.addEventListener('click', function(e) {
         if (!editMode) {
@@ -1157,25 +1424,30 @@
         toggleEditMode(!editMode);
     });
 
+    saveBtn.addEventListener('click', saveChanges);
+    resetBtn.addEventListener('click', resetToDefault);
+
     function toggleEditMode(enable) {
         editMode = enable;
         document.body.classList.toggle('edit-mode', editMode);
         document.querySelectorAll('.upload-zone').forEach(el => el.classList.toggle('visible', editMode));
         document.querySelectorAll('.add-btn').forEach(el => el.style.display = editMode ? 'inline-block' : 'none');
         editToggleBtn.classList.toggle('visible', editMode);
+        saveBtn.classList.toggle('visible', editMode);
+        resetBtn.classList.toggle('visible', editMode);
         editToggleBtn.textContent = editMode ? '🔓 Exit Edit Mode' : '🔒 Edit Mode';
         document.querySelectorAll('.editable').forEach(el => {
             el.contentEditable = editMode ? 'true' : 'false';
         });
         if (editMode) {
-            showToast('✏️ Edit mode activated – click any image to change its URL.');
+            showToast('✏️ Edit mode activated – click any image or text to edit, then click Save.');
         } else {
-            showToast('💾 Changes saved.');
+            showToast('💾 Edit mode deactivated.');
         }
     }
 
     // ============================================================
-    // EDITABLE IMAGES – click in edit mode to change URL
+    // EDITABLE IMAGES
     // ============================================================
     document.addEventListener('click', function(e) {
         const img = e.target.closest('.editable-image');
@@ -1185,7 +1457,7 @@
         const newUrl = prompt('Enter new image URL:', currentSrc);
         if (newUrl && newUrl.trim() !== '') {
             img.setAttribute('src', newUrl.trim());
-            showToast('🖼️ Image updated');
+            showToast('🖼️ Image updated – click Save to keep changes.');
         }
     });
 
@@ -1225,6 +1497,9 @@
                 item.className = 'gallery-item';
                 item.innerHTML = `<img src="${ev.target.result}" alt="${file.name}" class="editable-image" /><div class="badge">Uploaded</div><div class="overlay">${file.name}</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button>`;
                 gallery.prepend(item);
+                if (editMode) {
+                    item.querySelector('.editable-image').id = 'img-' + Date.now();
+                }
             };
             reader.readAsDataURL(file);
         });
@@ -1232,7 +1507,7 @@
         setTimeout(() => document.getElementById('imageUploadStatus').textContent = '', 3000);
         fileInput.value = '';
         previewContainer.innerHTML = '';
-        showToast('📸 Images uploaded successfully');
+        showToast('📸 Images uploaded – click Save to keep them.');
     });
 
     function deleteGalleryItem(btn) { btn.closest('.gallery-item').remove(); showToast('🗑️ Image removed'); }
@@ -1298,21 +1573,15 @@
     });
 
     // ============================================================
-    // LANGUAGE SWITCHER
+    // LOAD SAVED CHANGES ON PAGE LOAD
     // ============================================================
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            const lang = this.dataset.lang;
-            document.body.className = 'lang-' + lang;
-            showToast('🌐 Language switched to ' + this.textContent);
-        });
-    });
+    loadChanges();
 
-    document.body.className = 'lang-en';
+    // ============================================================
+    // INIT
+    // ============================================================
     toggleEditMode(false);
-    console.log('🏛️ Shree Parth Academy – All pages ready.');
+    console.log('🏛️ Shree Parth Academy – #1 Educational Website, Psychedelic Tech Theme.');
 </script>
 </body>
-                                                                                                    </html>
+</html>
