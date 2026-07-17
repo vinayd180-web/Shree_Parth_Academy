@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shree Parth Academy · An Emperor of Knowledge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root {
@@ -19,8 +19,11 @@
             --radius: 20px;
             --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
             --font-serif: 'Playfair Display', serif;
+            --font-devanagari: 'Noto Sans Devanagari', sans-serif;
         }
-        body { font-family:'Inter',sans-serif; background:var(--light-bg); color:var(--primary); line-height:1.6; }
+        body { font-family:'Inter',sans-serif; background:var(--light-bg); color:var(--primary); line-height:1.6; overflow-x:hidden; }
+
+        /* ===== NAVBAR ===== */
         .navbar {
             background: var(--primary);
             padding: 0.8rem 2.5rem;
@@ -95,11 +98,36 @@
             background: var(--gold);
             border-radius: 4px;
         }
+        .lang-switcher {
+            display: flex;
+            gap: 0.3rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border-radius: 60px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+        .lang-btn.active { background: var(--gold); color: var(--primary); }
+        .lang-btn:hover:not(.active) { color: white; }
+
+        /* ===== PAGE CONTAINER ===== */
         .page-container { max-width:1200px; margin:0 auto; padding:2rem; }
         .page { display:none; animation:fadeIn 0.5s ease; }
         .page.active { display:block; }
         @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
+        /* ===== CARDS ===== */
         .card {
             background: white;
             border-radius: var(--radius);
@@ -110,6 +138,8 @@
             margin-bottom: 1.5rem;
         }
         .card:hover { box-shadow: 0 30px 80px rgba(0,0,0,0.12); transform:translateY(-4px); }
+        .card-premium { background: linear-gradient(145deg, #ffffff, #faf6f0); border: 1px solid var(--gold); }
+
         .section-title {
             font-size: 2.2rem;
             font-weight: 800;
@@ -128,8 +158,11 @@
             background: linear-gradient(to right, var(--gold), transparent);
             margin-left:1rem;
         }
+
         .grid-2col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+        .grid-3col { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; }
         .grid-4col { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; }
+
         @media (max-width:768px) {
             .grid-2col { grid-template-columns:1fr; }
             .navbar { padding:0.8rem 1rem; }
@@ -152,11 +185,10 @@
             gap: 10px;
         }
         .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(212,168,67,0.4); }
-
         .mt-2 { margin-top:1.5rem; }
         .text-center { text-align:center; }
 
-        /* HERO */
+        /* ===== HERO ===== */
         .hero-section {
             background: linear-gradient(135deg, var(--primary) 0%, #1a2d4a 100%);
             border-radius: var(--radius);
@@ -176,25 +208,14 @@
             z-index:0;
         }
         .hero-section .hero-content { position:relative; z-index:1; }
-        .hero-section h1 {
-            font-size:3.5rem; font-weight:900; letter-spacing:-1px;
-            font-family:var(--font-serif);
-        }
+        .hero-section h1 { font-size:3.5rem; font-weight:900; letter-spacing:-1px; font-family:var(--font-serif); }
         .hero-section h1 span { color:var(--gold); }
-        .hero-section .tagline {
-            font-size:1.6rem; color:var(--gold); font-weight:600;
-            font-family:var(--font-serif);
-        }
-        .hero-stats {
-            display:flex; gap:3rem; margin-top:2rem; flex-wrap:wrap;
-        }
-        .hero-stats .stat .number {
-            font-size:2.8rem; font-weight:900; color:var(--gold);
-            display:block; font-family:var(--font-serif);
-        }
+        .hero-section .tagline { font-size:1.6rem; color:var(--gold); font-weight:600; font-family:var(--font-serif); }
+        .hero-stats { display:flex; gap:3rem; margin-top:2rem; flex-wrap:wrap; }
+        .hero-stats .stat .number { font-size:2.8rem; font-weight:900; color:var(--gold); display:block; font-family:var(--font-serif); }
         .hero-stats .stat .label { font-size:0.9rem; opacity:0.7; text-transform:uppercase; letter-spacing:1px; }
 
-        /* TRADITION CARDS */
+        /* ===== TRADITION CARDS ===== */
         .tradition-card {
             background: white;
             padding: 1.5rem;
@@ -212,9 +233,10 @@
             background:#f0f0f0;
         }
         .tradition-card h3 { font-size:1.2rem; font-family:var(--font-serif); }
-        .tradition-card .marathi { color:#c0392b; font-weight:600; font-size:0.95rem; }
+        .tradition-card .marathi { color:#c0392b; font-weight:600; font-size:0.95rem; font-family:var(--font-devanagari); }
         .tradition-card p { color:#64748b; font-size:0.95rem; margin-top:0.5rem; }
 
+        /* ===== MARATHI CARDS ===== */
         .marathi-card {
             background: white;
             border-radius: 16px;
@@ -224,18 +246,11 @@
             border: 2px solid var(--gold);
         }
         .marathi-card:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
-        .marathi-card img {
-            width:100%; height:auto; display:block;
-            border-bottom: 2px solid var(--gold);
-        }
-        .marathi-card .caption {
-            padding:1rem; text-align:center;
-            background: #fefcf5; font-weight:500; color: var(--primary);
-        }
-        .marathi-card .caption .en {
-            font-size:0.9rem; color:#64748b; margin-top:0.3rem; font-style:italic;
-        }
+        .marathi-card img { width:100%; height:auto; display:block; border-bottom: 2px solid var(--gold); }
+        .marathi-card .caption { padding:1rem; text-align:center; background: #fefcf5; font-weight:500; color: var(--primary); }
+        .marathi-card .caption .en { font-size:0.9rem; color:#64748b; margin-top:0.3rem; font-style:italic; }
 
+        /* ===== GALLERY ===== */
         .image-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
@@ -270,21 +285,100 @@
             padding:0.2rem 0.8rem; border-radius:60px;
             font-size:0.7rem; font-weight:700;
         }
-
-        .director-photo {
-            width:140px; height:140px; object-fit:cover;
-            border-radius:50%; border:4px solid var(--gold);
-            box-shadow:0 8px 30px rgba(0,0,0,0.15);
+        .delete-btn {
+            position:absolute; top:10px; left:10px;
+            background:rgba(0,0,0,0.4);
+            color:white; border:none; border-radius:50%;
+            width:28px; height:28px;
+            font-size:14px; cursor:pointer;
+            opacity:0; transition:opacity 0.3s;
+            display:flex; align-items:center; justify-content:center;
+            backdrop-filter:blur(4px);
         }
-        @media (max-width:768px) { .director-photo { width:100px; height:100px; } }
+        .gallery-item:hover .delete-btn { opacity:1; }
+        .delete-btn:hover { background:rgba(200,0,0,0.8); }
 
-        .map-container {
-            border-radius:16px; overflow:hidden;
-            border:3px solid var(--gold);
-            height:300px;
+        /* ===== UPLOAD ===== */
+        .upload-zone {
+            border:3px dashed #cbd5e1; border-radius:16px;
+            padding:2rem 1.5rem; text-align:center;
+            background:#fafdff; transition:var(--transition);
+            cursor:pointer; display:none;
         }
-        .map-container iframe { width:100%; height:100%; border:none; }
+        .upload-zone.visible { display:block; }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color:var(--gold); background:#fefcf5;
+        }
+        .upload-zone i { font-size:3rem; color:var(--gold); opacity:0.5; margin-bottom:0.3rem; }
+        .upload-zone input[type="file"] { display:none; }
+        .upload-preview {
+            display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem;
+        }
+        .upload-preview .preview-item {
+            position:relative; width:80px; height:80px;
+            border-radius:10px; overflow:hidden;
+            border:2px solid var(--gold);
+            animation:popIn 0.3s ease;
+        }
+        .upload-preview .preview-item img { width:100%; height:100%; object-fit:cover; }
+        .upload-preview .preview-item .remove-preview {
+            position:absolute; top:-6px; right:-6px;
+            background:rgba(200,0,0,0.8); color:white;
+            border:none; border-radius:50%; width:20px; height:20px;
+            font-size:10px; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+        }
+        @keyframes popIn { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
 
+        /* ===== EDITABLE ===== */
+        .editable {
+            outline:2px dashed transparent;
+            transition:outline 0.2s, background 0.2s;
+            padding:2px 4px; border-radius:4px; cursor:default;
+        }
+        .edit-mode .editable {
+            cursor:text;
+            outline:2px dashed rgba(212,168,67,0.3);
+        }
+        .edit-mode .editable:hover { background:rgba(212,168,67,0.05); }
+        .edit-mode .editable:focus { outline:2px solid var(--gold); background:rgba(212,168,67,0.1); }
+
+        .editable-image {
+            cursor:pointer; transition:var(--transition); position:relative;
+        }
+        .edit-mode .editable-image::after {
+            content:'✎'; position:absolute; top:50%; left:50%;
+            transform:translate(-50%,-50%);
+            background:rgba(0,0,0,0.6); color:white;
+            padding:0.5rem 1rem; border-radius:60px;
+            font-size:1.2rem; opacity:0;
+            transition:opacity 0.3s; pointer-events:none;
+        }
+        .edit-mode .editable-image:hover::after { opacity:1; }
+
+        .edit-toggle {
+            display:none;
+            position:fixed; bottom:20px; right:20px;
+            background:var(--gold); color:var(--primary);
+            border:none; border-radius:60px;
+            padding:0.8rem 1.8rem; font-weight:700;
+            cursor:pointer; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+            z-index:999; transition:var(--transition);
+        }
+        .edit-toggle.visible { display:block; }
+        .edit-toggle:hover { transform:scale(1.05); }
+
+        .add-btn {
+            background:var(--gold); color:var(--primary);
+            border:none; padding:0.4rem 1.4rem;
+            border-radius:60px; font-weight:600;
+            cursor:pointer; transition:var(--transition);
+            font-size:0.9rem; display:none;
+        }
+        .edit-mode .add-btn { display:inline-block; }
+        .add-btn:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(212,168,67,0.3); }
+
+        /* ===== SOCIAL ===== */
         .social-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
         .social-link {
             display:inline-flex; align-items:center; gap:0.5rem;
@@ -300,6 +394,7 @@
         .social-link.instagram { background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
         .social-link.facebook { background:#1877f2; }
 
+        /* ===== PAYMENT ===== */
         .payment-options {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
@@ -316,6 +411,120 @@
         .payment-option i { font-size:2.5rem; color:var(--gold); display:block; margin-bottom:0.3rem; }
         .payment-option .label { font-weight:600; }
 
+        .qr-container {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin:1rem 0;
+            min-height:200px;
+            border:3px dashed #cbd5e1;
+            border-radius:16px;
+            background:#fafdff;
+            color:#94a3b8;
+            font-size:1.1rem;
+            flex-direction:column;
+            gap:0.5rem;
+        }
+        .qr-container i { font-size:3rem; color:var(--gold); opacity:0.5; }
+        .bank-details { background:#f8fafc; padding:1rem; border-radius:12px; border:1px solid #e2e8f0; }
+        .bank-details p { margin:0.3rem 0; font-size:0.9rem; }
+
+        /* ===== TOPPERS ===== */
+        .toppers-table {
+            width:100%; border-collapse:collapse; font-size:0.85rem;
+        }
+        .toppers-table th {
+            background:var(--primary); color:white; padding:0.6rem 0.8rem;
+            text-align:left; font-weight:600; position:sticky; top:0; z-index:10;
+        }
+        .toppers-table td { padding:0.4rem 0.8rem; border-bottom:1px solid #e2e8f0; vertical-align:middle; }
+        .toppers-table tr:hover { background:rgba(212,168,67,0.05); }
+        .toppers-table .rank { font-weight:700; color:var(--gold); text-align:center; }
+        .toppers-table .school { font-size:0.75rem; color:#64748b; font-weight:500; }
+        .toppers-table .delete-row {
+            background:transparent; border:none; color:#e74c3c;
+            cursor:pointer; opacity:0.3; transition:opacity 0.3s; font-size:0.9rem;
+        }
+        .toppers-table .delete-row:hover { opacity:1; }
+        .toppers-wrapper { max-height:600px; overflow-y:auto; border-radius:12px; border:1px solid #e2e8f0; }
+
+        /* ===== VIDEO ===== */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .video-item {
+            position:relative; border-radius:16px; overflow:hidden;
+            box-shadow:var(--shadow); aspect-ratio:16/9; background:#111;
+            border:2px solid transparent; transition:var(--transition);
+        }
+        .video-item:hover { border-color:var(--gold); transform:scale(1.02); }
+        .video-item video, .video-item iframe { width:100%; height:100%; object-fit:cover; border:none; }
+        .video-item .delete-btn {
+            position:absolute; top:8px; left:8px;
+            background:rgba(0,0,0,0.4); color:white; border:none; border-radius:50%;
+            width:28px; height:28px; font-size:14px; cursor:pointer;
+            opacity:0; transition:opacity 0.3s;
+            display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);
+        }
+        .video-item:hover .delete-btn { opacity:1; }
+        .video-item .youtube-badge {
+            position:absolute; bottom:10px; right:10px;
+            background:rgba(255,0,0,0.8); color:white;
+            padding:0.2rem 0.8rem; border-radius:60px; font-size:0.7rem; font-weight:600;
+        }
+
+        /* ===== DIRECTOR PHOTO ===== */
+        .director-photo {
+            width:160px;
+            height:160px;
+            object-fit:cover;
+            border-radius:50%;
+            border:4px solid var(--gold);
+            box-shadow:0 8px 30px rgba(0,0,0,0.15);
+            margin:0 auto 1rem auto;
+            display:block;
+        }
+        @media (max-width:768px) { .director-photo { width:120px; height:120px; } }
+
+        /* ===== MAP ===== */
+        .map-container {
+            border-radius:16px; overflow:hidden;
+            border:3px solid var(--gold);
+            height:300px;
+        }
+        .map-container iframe { width:100%; height:100%; border:none; }
+
+        /* ===== FORM ===== */
+        .form-group { margin-bottom:1rem; }
+        .form-group label { display:block; font-weight:600; margin-bottom:0.3rem; }
+        .form-group input, .form-group textarea {
+            width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem; transition:var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color:var(--gold); outline:none; }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position:fixed; bottom:2rem; right:2rem;
+            background:var(--primary); color:white;
+            padding:1rem 2rem; border-radius:12px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.2);
+            transform:translateY(100px); opacity:0;
+            transition:all 0.5s ease;
+            z-index:9999;
+            border-left:4px solid var(--gold);
+            max-width:400px;
+        }
+        .toast.show { transform:translateY(0); opacity:1; }
+        .toast i { margin-right:10px; color:var(--gold); }
+
+        /* ===== LANGUAGE ===== */
+        [data-lang] { display:none; }
+        .lang-en [data-lang="en"], .lang-mr [data-lang="mr"], .lang-semi [data-lang="semi"] { display:inline; }
+
+        /* ===== FOOTER ===== */
         .footer {
             background:var(--primary); color:rgba(255,255,255,0.7);
             padding:3rem 2rem 1.5rem; margin-top:4rem;
@@ -331,98 +540,6 @@
         .footer .footer-logo { display:flex; align-items:center; gap:12px; }
         .footer .footer-logo img { height:50px; width:auto; background:transparent; border:none; object-fit:contain; }
         .footer-bottom { text-align:center; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); font-size:0.9rem; opacity:0.6; }
-
-        .toast {
-            position:fixed; bottom:2rem; right:2rem;
-            background:var(--primary); color:white;
-            padding:1rem 2rem; border-radius:12px;
-            box-shadow:0 10px 40px rgba(0,0,0,0.2);
-            transform:translateY(100px); opacity:0;
-            transition:all 0.5s ease;
-            z-index:9999;
-            border-left:4px solid var(--gold);
-            max-width:400px;
-        }
-        .toast.show { transform:translateY(0); opacity:1; }
-        .toast i { margin-right:10px; color:var(--gold); }
-
-        .edit-toggle {
-            display:none;
-            position:fixed; bottom:20px; right:20px;
-            background:var(--gold); color:var(--primary);
-            border:none; border-radius:60px;
-            padding:0.8rem 1.8rem; font-weight:700;
-            cursor:pointer; box-shadow:0 4px 20px rgba(0,0,0,0.2);
-            z-index:999; transition:var(--transition);
-        }
-        .edit-toggle.visible { display:block; }
-        .edit-toggle:hover { transform:scale(1.05); }
-
-        .editable {
-            outline:2px dashed transparent;
-            transition:outline 0.2s, background 0.2s;
-            padding:2px 4px; border-radius:4px; cursor:default;
-        }
-        .edit-mode .editable {
-            cursor:text;
-            outline:2px dashed rgba(212,168,67,0.3);
-        }
-        .edit-mode .editable:hover { background:rgba(212,168,67,0.05); }
-        .edit-mode .editable:focus { outline:2px solid var(--gold); background:rgba(212,168,67,0.1); }
-        .editable-image {
-            cursor:pointer; transition:var(--transition); position:relative;
-        }
-        .edit-mode .editable-image::after {
-            content:'✎'; position:absolute; top:50%; left:50%;
-            transform:translate(-50%,-50%);
-            background:rgba(0,0,0,0.6); color:white;
-            padding:0.5rem 1rem; border-radius:60px;
-            font-size:1.2rem; opacity:0;
-            transition:opacity 0.3s; pointer-events:none;
-        }
-        .edit-mode .editable-image:hover::after { opacity:1; }
-
-        .upload-zone {
-            border:3px dashed #cbd5e1; border-radius:16px;
-            padding:2rem 1.5rem; text-align:center;
-            background:#fafdff; transition:var(--transition);
-            cursor:pointer; display:none;
-        }
-        .upload-zone.visible { display:block; }
-        .upload-zone:hover, .upload-zone.dragover {
-            border-color:var(--gold); background:#fefcf5;
-        }
-        .upload-zone i { font-size:3rem; color:var(--gold); opacity:0.5; margin-bottom:0.3rem; }
-        .upload-zone input[type="file"] { display:none; }
-
-        .add-btn {
-            background:var(--gold); color:var(--primary);
-            border:none; padding:0.4rem 1.4rem;
-            border-radius:60px; font-weight:600;
-            cursor:pointer; transition:var(--transition);
-            font-size:0.9rem; display:none;
-        }
-        .edit-mode .add-btn { display:inline-block; }
-        .add-btn:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(212,168,67,0.3); }
-
-        .lang-switcher {
-            display:flex; gap:0.3rem;
-            background:rgba(255,255,255,0.1);
-            padding:0.2rem; border-radius:60px;
-            border:1px solid rgba(255,255,255,0.1);
-        }
-        .lang-btn {
-            padding:0.3rem 0.8rem; border-radius:60px;
-            border:none; background:transparent;
-            color:rgba(255,255,255,0.6); font-weight:600;
-            font-size:0.7rem; cursor:pointer;
-            transition:var(--transition); text-transform:uppercase;
-        }
-        .lang-btn.active { background:var(--gold); color:var(--primary); }
-        .lang-btn:hover:not(.active) { color:white; }
-
-        [data-lang] { display:none; }
-        .lang-en [data-lang="en"], .lang-mr [data-lang="mr"], .lang-semi [data-lang="semi"] { display:inline; }
     </style>
 </head>
 <body>
@@ -432,7 +549,6 @@
 
 <nav class="navbar">
     <div class="logo" id="logoTrigger">
-        <!-- NEW LOGO URL -->
         <img src="https://i.postimg.cc/6y1ZG0hj/SHREE-PARTH-ACADEMY-84-x-44.png" alt="Shree Parth Academy Logo" />
         <div class="logo-text">
             <span class="editable" contenteditable="false">Shree Parth Academy</span>
@@ -442,6 +558,11 @@
     <div class="nav-links">
         <a class="active" data-page="home"><i class="fas fa-home"></i> <span data-lang="en">Home</span><span data-lang="mr">मुख्यपृष्ठ</span><span data-lang="semi">Home</span></a>
         <a data-page="about"><i class="fas fa-info-circle"></i> <span data-lang="en">About</span><span data-lang="mr">आमच्याबद्दल</span><span data-lang="semi">About</span></a>
+        <a data-page="courses"><i class="fas fa-book-open"></i> <span data-lang="en">Courses</span><span data-lang="mr">अभ्यासक्रम</span><span data-lang="semi">Courses</span></a>
+        <a data-page="toppers"><i class="fas fa-trophy"></i> <span data-lang="en">Toppers</span><span data-lang="mr">टॉपर्स</span><span data-lang="semi">Toppers</span></a>
+        <a data-page="gallery"><i class="fas fa-images"></i> <span data-lang="en">Gallery</span><span data-lang="mr">गॅलरी</span><span data-lang="semi">Gallery</span></a>
+        <a data-page="videos"><i class="fas fa-video"></i> <span data-lang="en">Videos</span><span data-lang="mr">व्हिडिओ</span><span data-lang="semi">Videos</span></a>
+        <a data-page="enquiry"><i class="fas fa-envelope"></i> <span data-lang="en">Enquiry</span><span data-lang="mr">चौकशी</span><span data-lang="semi">Enquiry</span></a>
         <a data-page="payment"><i class="fas fa-credit-card"></i> <span data-lang="en">Pay</span><span data-lang="mr">पैसे द्या</span><span data-lang="semi">Pay</span></a>
         <div class="lang-switcher">
             <button class="lang-btn active" data-lang="en">EN</button>
@@ -453,15 +574,17 @@
 
 <div class="page-container">
 
-    <!-- HOME -->
+    <!-- ============================================================ -->
+    <!-- HOME PAGE -->
+    <!-- ============================================================ -->
     <div id="homePage" class="page active">
         <div class="hero-section">
-            <!-- NEW BACKGROUND URL -->
             <img src="https://i.postimg.cc/tJ85n9Bp/IMG-20260703-WA0015.jpg" alt="Hero Background" class="hero-bg" />
             <div class="hero-content">
                 <h1>An Emperor of <span class="editable" contenteditable="false">Knowledge</span></h1>
                 <div class="tagline">⚜️ Shree Parth Academy</div>
                 <p class="editable" contenteditable="false">Established Since 2009 • "We strive for our student's success."</p>
+                <p class="editable" contenteditable="false" style="font-size:1.1rem; max-width:600px;">We are a premier educational institution dedicated to shaping young minds with a blend of traditional values and modern teaching methodologies.</p>
                 <div class="hero-stats">
                     <div class="stat"><span class="number">2009</span><span class="label">Established</span></div>
                     <div class="stat"><span class="number">5000+</span><span class="label">Students</span></div>
@@ -471,7 +594,52 @@
             </div>
         </div>
 
-        <!-- MARATHI PHILOSOPHY CARDS (Contextually relevant) -->
+        <!-- Why Choose Us -->
+        <h2 class="section-title"><i class="fas fa-star"></i> Why Choose Shree Parth Academy?</h2>
+        <div class="grid-3col">
+            <div class="card card-premium text-center" style="padding:1.5rem;">
+                <i class="fas fa-chalkboard-teacher" style="font-size:3rem; color:var(--gold);"></i>
+                <h3 class="editable" contenteditable="false">Expert Faculty</h3>
+                <p class="editable" contenteditable="false">Our teachers are highly qualified with years of experience and a passion for teaching. They provide personalized attention to every student.</p>
+            </div>
+            <div class="card card-premium text-center" style="padding:1.5rem;">
+                <i class="fas fa-book-open" style="font-size:3rem; color:var(--gold);"></i>
+                <h3 class="editable" contenteditable="false">Comprehensive Curriculum</h3>
+                <p class="editable" contenteditable="false">We cover all subjects in depth, with regular tests, assignments, and doubt-clearing sessions to ensure complete understanding.</p>
+            </div>
+            <div class="card card-premium text-center" style="padding:1.5rem;">
+                <i class="fas fa-users" style="font-size:3rem; color:var(--gold);"></i>
+                <h3 class="editable" contenteditable="false">Student-Centric Approach</h3>
+                <p class="editable" contenteditable="false">We focus on individual growth, building confidence, and nurturing talent through interactive learning and co-curricular activities.</p>
+            </div>
+        </div>
+
+        <!-- Get in Touch – from IMG-20260703-WA0008.jpg -->
+        <div class="card">
+            <div class="grid-2col">
+                <div>
+                    <h3><i class="fas fa-address-card" style="color:var(--gold);"></i> Get in Touch</h3>
+                    <p class="editable" contenteditable="false"><i class="fas fa-phone"></i> +91 9221838267 | +91 9011395913</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-envelope"></i> shreeparthacademy2009@gmail.com</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-map-marker-alt"></i> Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-clock" style="color:var(--gold);"></i> Timings</h3>
+                    <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches (8:00 AM – 8:00 PM)</p>
+                    <p class="editable" contenteditable="false">Sunday: Moderator Sessions & Special Classes</p>
+                    <p style="color:var(--gold); font-weight:700;">✦ ESTD: 2009 ✦</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality vs Quantity – from IMG-20260703-WA0009.jpg -->
+        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
+            <h2 style="color:var(--gold); font-family:var(--font-serif);" class="editable" contenteditable="false">What do you prefer? Quality or Quantity?</h2>
+            <p style="max-width:600px; margin:0.5rem auto;" class="editable" contenteditable="false">If your primary requirement is focused, premium‑tier individual academic support, call our enrollment desk today!</p>
+            <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Contact Now</button>
+        </div>
+
+        <!-- Marathi Philosophy – from IMG-20260703-WA0011.jpg and IMG-20260703-WA0014.jpg -->
         <h2 class="section-title"><i class="fas fa-quote-right"></i> Our Philosophy in Marathi</h2>
         <div class="grid-4col">
             <div class="marathi-card">
@@ -504,7 +672,7 @@
             </div>
         </div>
 
-        <!-- ACADEMIC TRADITIONS -->
+        <!-- Academic Traditions -->
         <h2 class="section-title mt-2"><i class="fas fa-landmark"></i> Our Academic Traditions</h2>
         <div class="grid-4col">
             <div class="tradition-card">
@@ -533,32 +701,7 @@
             </div>
         </div>
 
-        <!-- CONTACT & TIMINGS -->
-        <div class="card">
-            <div class="grid-2col">
-                <div>
-                    <h3><i class="fas fa-address-card" style="color:var(--gold);"></i> Get in Touch</h3>
-                    <p class="editable" contenteditable="false"><i class="fas fa-phone"></i> +91 9221838267 | +91 9011395913</p>
-                    <p class="editable" contenteditable="false"><i class="fas fa-envelope"></i> shreeparthacademy2009@gmail.com</p>
-                    <p class="editable" contenteditable="false"><i class="fas fa-map-marker-alt"></i> Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-clock" style="color:var(--gold);"></i> Timings</h3>
-                    <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches</p>
-                    <p class="editable" contenteditable="false">Sunday: Moderator Sessions</p>
-                    <p style="color:var(--gold); font-weight:700;">✦ ESTD: 2009 ✦</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- QUALITY vs QUANTITY -->
-        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
-            <h2 style="color:var(--gold); font-family:var(--font-serif);" class="editable" contenteditable="false">What do you prefer? Quality or Quantity?</h2>
-            <p style="max-width:600px; margin:0.5rem auto;" class="editable" contenteditable="false">If your primary requirement is focused, premium‑tier individual academic support, call our enrollment desk today!</p>
-            <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Contact Now</button>
-        </div>
-
-        <!-- SOCIAL LINKS -->
+        <!-- Social Links -->
         <h2 class="section-title mt-2"><i class="fas fa-share-alt"></i> Connect With Us</h2>
         <div class="card text-center">
             <div class="social-links">
@@ -572,20 +715,32 @@
         </div>
     </div>
 
-    <!-- ABOUT -->
+    <!-- ============================================================ -->
+    <!-- ABOUT PAGE -->
+    <!-- ============================================================ -->
     <div id="aboutPage" class="page">
         <h2 class="section-title"><i class="fas fa-building-columns"></i> About Us</h2>
+
+        <!-- Director's Desk – prominent -->
+        <div class="card card-premium" style="text-align:center;">
+            <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-user-tie"></i> Director's Desk</h3>
+            <img src="https://i.postimg.cc/vcSn6zv5/file-0000000048b0720b861f556150fbb74b.png" alt="Director" class="director-photo editable-image" />
+            <p class="editable" contenteditable="false" style="font-size:1.2rem; font-weight:600;">Mr. Swapnil Kalaskar</p>
+            <p class="editable" contenteditable="false" style="max-width:700px; margin:0.5rem auto;">With over 15 years of experience in education, our director envisions a learning environment where every child discovers their true potential. He believes in holistic development that goes beyond textbooks, fostering critical thinking, creativity, and moral values.</p>
+            <p class="editable" contenteditable="false" style="font-style:italic; color:var(--gold);">"We are not competitors; we are sculptors of future leaders."</p>
+        </div>
+
         <div class="grid-2col">
             <div>
                 <div class="card card-premium">
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-bullseye"></i> Our Mission</h3>
-                    <p class="editable" contenteditable="false">To Enable The Students Success Beyond Excellence In Their Life Long Pursuit Of Knowledge And In Their Contribution As Responsible Citizens In A Rapidly Changing Globalized World.</p>
+                    <p class="editable" contenteditable="false">To Enable The Students Success Beyond Excellence In Their Life Long Pursuit Of Knowledge And In Their Contribution As Responsible Citizens In A Rapidly Changing Globalized World. We aim to provide quality education that empowers students to excel academically and personally.</p>
                     <br>
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-eye"></i> Our Vision</h3>
-                    <p class="editable" contenteditable="false">To Become A Standard Of Excellence Fostering Intellect, Creativity And Character In An Active, Student Centered Learning Community.</p>
+                    <p class="editable" contenteditable="false">To Become A Standard Of Excellence Fostering Intellect, Creativity And Character In An Active, Student Centered Learning Community. We envision a future where every student is a lifelong learner and a responsible global citizen.</p>
                     <br>
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-heart"></i> Our Motive</h3>
-                    <p class="editable" contenteditable="false">"In Every Child There Is A Hidden Warrior. It Only Requires Self Confidence And Proper Guidance."</p>
+                    <p class="editable" contenteditable="false">"In Every Child There Is A Hidden Warrior. It Only Requires Self Confidence And Proper Guidance." Our motive is to ignite that inner warrior and guide each child towards their unique path of success.</p>
                 </div>
             </div>
             <div>
@@ -593,52 +748,151 @@
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-clock"></i> Our Journey</h3>
                     <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2009</span>
-                        <span class="editable" contenteditable="false">Founded with a vision of excellence</span>
+                        <span class="editable" contenteditable="false">Founded with a vision of excellence in education</span>
                     </div>
                     <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2015</span>
-                        <span class="editable" contenteditable="false">Expanded to 500+ students</span>
+                        <span class="editable" contenteditable="false">Expanded to 500+ students with state-of-the-art facilities</span>
                     </div>
                     <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2020</span>
-                        <span class="editable" contenteditable="false">Digital transformation & E‑Learning</span>
+                        <span class="editable" contenteditable="false">Digital transformation & E‑Learning integration</span>
                     </div>
                     <div style="display:flex; gap:1.5rem; padding:0.8rem 0;">
                         <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2024</span>
-                        <span class="editable" contenteditable="false">World‑Class curriculum & facilities</span>
+                        <span class="editable" contenteditable="false">World‑Class curriculum, smart classrooms, and global exposure</span>
                     </div>
-                </div>
-                <div class="card card-premium mt-2">
-                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-user-tie"></i> Director's Desk</h3>
-                    <div style="display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
-                        <!-- NEW DIRECTOR PHOTO -->
-                        <img src="https://i.postimg.cc/vcSn6zv5/file-0000000048b0720b861f556150fbb74b.png" alt="Director" class="director-photo editable-image" />
-                        <div>
-                            <p class="editable" contenteditable="false"><strong>Mr. Swapnil Kalaskar</strong></p>
-                            <p class="editable" contenteditable="false">With over 15 years of experience in education, our director envisions a learning environment where every child discovers their true potential. We believe in holistic development that goes beyond textbooks.</p>
-                        </div>
-                    </div>
-                    <p class="editable mt-2" contenteditable="false">"We are not competitors; we are sculptors of future leaders."</p>
                 </div>
                 <div class="card card-premium mt-2">
                     <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-map-pin"></i> Our Location</h3>
                     <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.456789012345!2d73.12345678901234!3d19.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDA3JzI0LjUiTiA3M8KwMDcnMjQuNSJF!5e0!3m2!1sen!2sin!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
                     </div>
+                    <p class="editable" contenteditable="false" style="margin-top:1rem;">Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- PAYMENT -->
+    <!-- ============================================================ -->
+    <!-- COURSES PAGE -->
+    <!-- ============================================================ -->
+    <div id="coursesPage" class="page">
+        <h2 class="section-title"><i class="fas fa-book-open"></i> Our Courses</h2>
+        <div class="card card-premium">
+            <h3 style="color:var(--gold);">Academic Programs</h3>
+            <ul style="list-style:none; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1rem; padding:0;">
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>5th to 10th English Medium (State Board)</strong><br>Comprehensive coverage of all subjects with regular assessments.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>CBSE (5th to 10th)</strong><br>Focused preparation for CBSE curriculum with expert guidance.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>11th & 12th Commerce (State Board & CBSE)</strong><br>In-depth study of Accountancy, Economics, Business Studies, and more.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Foundation Courses (8th & 9th)</strong><br>Strong foundation building for future competitive exams.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Competitive Exam Preparation (JEE, NEET, MHT‑CET)</strong><br>Specialized coaching for medical and engineering entrance exams.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Spoken English & Personality Development</strong><br>Enhance communication skills and overall personality.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Abacus & Vedic Maths</strong><br>Mental maths and speed calculation techniques.</li>
+                <li class="editable" contenteditable="false" style="background:#f8fafc; padding:1rem; border-radius:12px; border-left:4px solid var(--gold);"><strong>Coding & Robotics</strong><br>Hands-on learning in programming and robotics for young innovators.</li>
+            </ul>
+            <p class="mt-2 editable" contenteditable="false">Each course is designed with a focus on conceptual clarity, regular assessments, and individual attention. We also conduct periodic parent-teacher meetings to track progress.</p>
+        </div>
+        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
+            <h3 style="color:var(--gold);">Need a custom program?</h3>
+            <p>We offer personalized learning plans tailored to each student's needs. Contact us for a consultation.</p>
+            <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Enquire Now</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TOPPERS PAGE -->
+    <!-- ============================================================ -->
+    <div id="toppersPage" class="page">
+        <h2 class="section-title"><i class="fas fa-trophy"></i> Our Jewels of SSC</h2>
+        <div class="card card-premium">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <h3 style="color:var(--gold);"><i class="fas fa-medal"></i> SSC TOPPERS IN SHREE PARTH ACADEMY</h3>
+                <button class="add-btn" id="addTopperBtn"><i class="fas fa-plus"></i> Add Topper</button>
+            </div>
+            <div class="toppers-wrapper">
+                <table class="toppers-table" id="toppersTable">
+                    <thead><tr><th style="width:60px;">Rank</th><th>Name</th><th style="width:80px;">%</th><th>School</th><th style="width:40px;"></th></tr></thead>
+                    <tbody id="toppersBody"></tbody>
+                </table>
+            </div>
+            <p class="mt-2 text-center editable" contenteditable="false" style="color:#64748b; font-style:italic;">*And Many with More than Distinction</p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- GALLERY PAGE -->
+    <!-- ============================================================ -->
+    <div id="galleryPage" class="page">
+        <h2 class="section-title"><i class="fas fa-images"></i> Premium Image Gallery</h2>
+        <div class="card no-print">
+            <h3><i class="fas fa-cloud-upload-alt" style="color:var(--gold);"></i> Upload Images</h3>
+            <div class="upload-zone" id="imageUploadZone">
+                <i class="fas fa-image"></i>
+                <p><strong>Tap or drop images here</strong></p>
+                <p class="upload-hint">JPG, PNG, WEBP supported</p>
+                <input type="file" id="imageFileInput" accept="image/*" multiple />
+                <button class="btn-gold" id="uploadImageBtn" style="width:auto; padding:0.6rem 2rem; margin-top:1rem;"><i class="fas fa-upload"></i> Upload</button>
+                <div class="upload-preview" id="uploadPreview"></div>
+            </div>
+            <div id="imageUploadStatus" style="margin-top:0.5rem; font-weight:500; color:var(--gold);"></div>
+        </div>
+        <div class="image-gallery" id="imageGallery">
+            <div class="gallery-item"><img src="https://i.postimg.cc/4HXD5WLP/IMG-20260707-WA0010.jpg" alt="Campus" class="editable-image" /><div class="badge">Campus</div><div class="overlay">Main Campus</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://i.postimg.cc/64Bk0MjV/IMG-20260707-WA0011.jpg" alt="Faculty" class="editable-image" /><div class="badge">Faculty</div><div class="overlay">Expert Teachers</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://i.postimg.cc/wR9CVwfh/IMG-20260707-WA0012.jpg" alt="Students" class="editable-image" /><div class="badge">Students</div><div class="overlay">Top Performers</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://i.postimg.cc/1VykHvCw/IMG-20260707-WA0013.jpg" alt="Library" class="editable-image" /><div class="badge">Library</div><div class="overlay">Digital Library</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://i.postimg.cc/K3m6N0qM/IMG-20260707-WA0014.jpg" alt="Events" class="editable-image" /><div class="badge">Events</div><div class="overlay">Van Bhojan</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+            <div class="gallery-item"><img src="https://i.postimg.cc/GTbWQX7T/IMG-20260707-WA0015.jpg" alt="Awards" class="editable-image" /><div class="badge">Awards</div><div class="overlay">Prize Distribution</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- VIDEOS PAGE -->
+    <!-- ============================================================ -->
+    <div id="videosPage" class="page">
+        <h2 class="section-title"><i class="fas fa-video"></i> Video Gallery</h2>
+        <div class="card no-print">
+            <h3><i class="fas fa-cloud-upload-alt" style="color:var(--gold);"></i> Add Videos</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+                <button class="add-btn" id="addVideoBtn"><i class="fas fa-upload"></i> Upload Video</button>
+                <input type="file" id="videoFileInput" accept="video/*" style="display:none;" />
+                <button class="add-btn" id="addYoutubeBtn"><i class="fab fa-youtube"></i> Add YouTube Link</button>
+            </div>
+            <div id="videoUploadStatus" style="margin-top:0.5rem; font-weight:500; color:var(--gold);"></div>
+        </div>
+        <div class="video-gallery" id="videoGallery">
+            <div class="video-item"><video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video><div class="youtube-badge">Sample</div><button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ENQUIRY PAGE -->
+    <!-- ============================================================ -->
+    <div id="enquiryPage" class="page">
+        <h2 class="section-title"><i class="fas fa-envelope"></i> Enquiry Form</h2>
+        <div class="card card-premium" style="max-width:700px; margin:0 auto;">
+            <form id="enquiryForm" onsubmit="event.preventDefault(); showToast('✅ Enquiry submitted! We will contact you soon.');">
+                <div class="form-group"><label>Full Name</label><input type="text" class="editable" contenteditable="false" value="Your Name" /></div>
+                <div class="form-group"><label>Email</label><input type="email" class="editable" contenteditable="false" value="your@email.com" /></div>
+                <div class="form-group"><label>Phone</label><input type="tel" class="editable" contenteditable="false" value="+91 9876543210" /></div>
+                <div class="form-group"><label>Message</label><textarea rows="4" class="editable" contenteditable="false">I would like to know more about your courses.</textarea></div>
+                <button type="submit" class="btn-gold"><i class="fas fa-paper-plane"></i> Send Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAYMENT PAGE -->
+    <!-- ============================================================ -->
     <div id="paymentPage" class="page">
         <h2 class="section-title"><i class="fas fa-credit-card"></i> Payment Portal</h2>
         <div class="grid-2col">
             <div>
                 <div class="card card-premium">
                     <h3><i class="fas fa-hand-holding-usd" style="color:var(--gold);"></i> Make a Payment</h3>
-                    <div class="form-group"><label>Amount (₹)</label><input type="number" value="5000" class="editable" contenteditable="false" style="width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem;" /></div>
-                    <div class="form-group"><label>Payment For</label><select class="editable" contenteditable="false" style="width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem;"><option>Tuition Fees</option><option>Exam Fees</option><option>Library Fees</option><option>Other</option></select></div>
+                    <div class="form-group"><label>Amount (₹)</label><input type="number" value="5000" class="editable" contenteditable="false" /></div>
+                    <div class="form-group"><label>Payment For</label><select class="editable" contenteditable="false"><option>Tuition Fees</option><option>Exam Fees</option><option>Library Fees</option><option>Other</option></select></div>
                     <button class="btn-gold" onclick="showToast('💳 Payment initiated! Please scan QR or use UPI to complete.')"><i class="fas fa-lock"></i> Pay Now</button>
                 </div>
             </div>
@@ -653,14 +907,17 @@
                     </div>
                     <div class="mt-2">
                         <h4 style="color:var(--gold);"><i class="fas fa-qrcode"></i> Scan to Pay (UPI)</h4>
-                        <div style="display:flex; justify-content:center; margin:1rem 0;">
-                            <img src="https://i.postimg.cc/tJ85n9Bp/IMG-20260703-WA0015.jpg" alt="UPI QR Code" style="max-width:200px; border:2px solid var(--gold); border-radius:12px; padding:8px; background:white;" class="editable-image" />
+                        <!-- QR CODE – VACANT – Add your QR in edit mode -->
+                        <div class="qr-container" id="qrContainer">
+                            <i class="fas fa-qrcode"></i>
+                            <p class="editable" contenteditable="false">Add your QR code image here</p>
+                            <p style="font-size:0.8rem; color:#94a3b8;" class="editable" contenteditable="false">(Upload in Edit Mode)</p>
                         </div>
                         <p class="text-center editable" contenteditable="false"><strong>UPI ID:</strong> shreeparth@upi</p>
                     </div>
                     <div class="mt-2">
                         <h4 style="color:var(--gold);"><i class="fas fa-university"></i> Bank Transfer Details</h4>
-                        <div style="background:#f8fafc; padding:1rem; border-radius:12px; border:1px solid #e2e8f0;" class="editable" contenteditable="false">
+                        <div class="bank-details editable" contenteditable="false">
                             <p><strong>Bank Name:</strong> HDFC Bank</p>
                             <p><strong>Account Name:</strong> Shree Parth Academy</p>
                             <p><strong>Account Number:</strong> 1234567890</p>
@@ -697,7 +954,7 @@
         </div>
         <div>
             <h4>Timings</h4>
-            <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches</p>
+            <p class="editable" contenteditable="false">Mon‑Sat: 8:00 AM – 8:00 PM</p>
             <p class="editable" contenteditable="false">Sunday: Moderator Sessions</p>
             <p style="color:var(--gold); font-weight:700; font-family:var(--font-serif);">✦ ESTD: 2009 ✦</p>
         </div>
@@ -706,7 +963,156 @@
 </footer>
 
 <script>
-    // ===== TOAST =====
+    // ============================================================
+    // TOPPERS DATA (89 students)
+    // ============================================================
+    const toppersData = [
+        { name: "Vaishnavi Sawant", pct: "95.80", school: "IES" },
+        { name: "Vaishnavi Patil", pct: "95.20", school: "Heaven Bell" },
+        { name: "Gargi Yadav", pct: "94.80", school: "Holy Spirit" },
+        { name: "Sushmita Ahirrao", pct: "94.73", school: "IES" },
+        { name: "Anand Khismatrao", pct: "93.82", school: "IES" },
+        { name: "Bhawna Chouhan", pct: "93.40", school: "FATIMA" },
+        { name: "Srushti Agnihotri", pct: "93.00", school: "Heaven Bell" },
+        { name: "Priyanka Thite", pct: "92.91", school: "IES" },
+        { name: "Abhijeet Howal", pct: "92.91", school: "IES" },
+        { name: "Tejal Jadhav", pct: "92.91", school: "IES" },
+        { name: "Sonal Surve", pct: "92.60", school: "ADARSH" },
+        { name: "Divya Gaikwad", pct: "92.40", school: "HOLY SPIRIT" },
+        { name: "Ankita Shankpal", pct: "92.40", school: "IES" },
+        { name: "Aditya Narayane", pct: "92.40", school: "IES" },
+        { name: "Neeraj Shukla", pct: "91.94", school: "NES" },
+        { name: "Jyoti Dubey", pct: "91.60", school: "HOLY SPIRIT" },
+        { name: "Kartik Shinde", pct: "91.60", school: "IES" },
+        { name: "Samiksha Yelve", pct: "91.60", school: "HEAVEN BELL" },
+        { name: "Sanket Rane", pct: "91.40", school: "HOLY SPIRIT" },
+        { name: "Priti Mundhe", pct: "91.40", school: "ADARSH" },
+        { name: "Saurabh Sariputra", pct: "91.27", school: "IES" },
+        { name: "Rudransh Shinde", pct: "91.20", school: "Balvikas" },
+        { name: "Sarthak Mhatre", pct: "91.00", school: "IES" },
+        { name: "Sayli Surve", pct: "91.00", school: "ADARSH" },
+        { name: "Nidhi Bhalerao", pct: "90.80", school: "Adarsh" },
+        { name: "Mukta Shanbhag", pct: "90.60", school: "IES" },
+        { name: "Snehal Narayane", pct: "90.60", school: "IES" },
+        { name: "Sudhanshu Singh", pct: "90.55", school: "CARMEL" },
+        { name: "Tanaya Daware", pct: "90.20", school: "Heaven Bell" },
+        { name: "Parth Kalaskar", pct: "90.00", school: "IES" },
+        { name: "Tejashree Mokashi", pct: "90.00", school: "IES" },
+        { name: "Isha Rane", pct: "90.00", school: "IES" },
+        { name: "Rutuja Thanage", pct: "90.00", school: "IES" },
+        { name: "Neeyati Narkar", pct: "90.00", school: "ST. ANTHONY" },
+        { name: "Deepali Kelambekar", pct: "90.00", school: "SAMARTH" },
+        { name: "Gunjan Patil", pct: "90.00", school: "IES" },
+        { name: "Manisha Birajdar", pct: "90.00", school: "IES" },
+        { name: "Arya Kadam", pct: "89.80", school: "IES" },
+        { name: "Ketaki Bhalekar", pct: "89.60", school: "Heaven Bell" },
+        { name: "Pooja Londhe", pct: "89.40", school: "IES" },
+        { name: "Yash Lanjekar", pct: "89.00", school: "Holy Spirit" },
+        { name: "Yojana Killedar", pct: "88.80", school: "HOLY SPIRIT" },
+        { name: "Dipesh Patil", pct: "88.60", school: "ADARSH" },
+        { name: "Ruchita Kolhe", pct: "88.60", school: "BALVIKAS" },
+        { name: "Atharva Shirke", pct: "88.40", school: "Heaven Bell" },
+        { name: "Pranav Dhangar", pct: "88.40", school: "NES" },
+        { name: "Harshwardhan Ghegadmal", pct: "88.00", school: "Adarsh" },
+        { name: "Siddhesh Jagtap", pct: "88.00", school: "IES" },
+        { name: "Viraj Dhanawade", pct: "87.80", school: "HOLY SPIRIT" },
+        { name: "Divya Chaudhary", pct: "87.80", school: "HOLY SPIRIT" },
+        { name: "Yashita Jadhav", pct: "86.80", school: "IES" },
+        { name: "Govind Nair", pct: "86.60", school: "HOLY SPIRIT" },
+        { name: "Nishanth Nimbalkar", pct: "86.40", school: "IES" },
+        { name: "Diksha Navale", pct: "86.40", school: "IES" },
+        { name: "Rakesh Chaudhary", pct: "86.20", school: "HOLY SPIRIT" },
+        { name: "Sakshi Nirgude", pct: "86.20", school: "NES" },
+        { name: "Shrishti Singh", pct: "86.00", school: "Gurukul International" },
+        { name: "Mahalaxmi T.", pct: "85.80", school: "Heaven Bell" },
+        { name: "Jinal Somwanshi", pct: "85.80", school: "HOLY SPIRIT" },
+        { name: "Shreshth Singh", pct: "85.60", school: "Heaven Bell" },
+        { name: "Rugveda Joshi", pct: "85.60", school: "HEAVEN BELL" },
+        { name: "Bhumika Kamble", pct: "85.00", school: "Heaven Bell" },
+        { name: "Vaishnavi Acharya", pct: "83.80", school: "Adarsh" },
+        { name: "Hetal Pandey", pct: "83.80", school: "SDM" },
+        { name: "Sailee Kamble", pct: "83.60", school: "Heaven Bell" },
+        { name: "Hitesh Rane", pct: "83.40", school: "IES" },
+        { name: "Sneha Hegde", pct: "83.40", school: "HEAVEN BELL" },
+        { name: "Vinay Dhankute", pct: "83.90", school: "Adarsh" },
+        { name: "Sanika Kudtarkar", pct: "83.00", school: "HEAVEN BELL" },
+        { name: "Arpita Sonkawade", pct: "82.60", school: "HOLY SPIRIT" },
+        { name: "Supriya Mitra", pct: "82.60", school: "HOLY SPIRIT" },
+        { name: "Prisha Alekar", pct: "82.40", school: "Adarsh" },
+        { name: "Aarya Rane", pct: "82.49", school: "IES" },
+        { name: "Pranav Kshirsagar", pct: "82.20", school: "HOLY SPIRIT" },
+        { name: "Ruchira Bangar", pct: "82.20", school: "SDM" },
+        { name: "Riddhesh Dagar", pct: "81.80", school: "Heaven Bell" },
+        { name: "Om Pankar", pct: "81.80", school: "IES" },
+        { name: "Sahil Gawas", pct: "81.80", school: "IES" },
+        { name: "Aryan Bhimani", pct: "81.60", school: "IES" },
+        { name: "Siddhesh Wagh", pct: "81.60", school: "HOLY SPIRIT" },
+        { name: "Rudra Jawale", pct: "81.40", school: "Heaven Bell" },
+        { name: "Sarthak Raut", pct: "81.40", school: "Heaven Bell" },
+        { name: "Mrunal Patil", pct: "81.00", school: "Heaven Bell" },
+        { name: "Sandeep Khodade", pct: "81.00", school: "Adarsh" },
+        { name: "Roshani Koli", pct: "81.00", school: "NES" },
+        { name: "Tanmay Dingankar", pct: "81.00", school: "NES" },
+        { name: "Tanmay Dubey", pct: "80.80", school: "Heaven Bell" },
+        { name: "Vedant Chaudhari", pct: "80.00", school: "NES" },
+        { name: "Shubham Gurav", pct: "80.00", school: "Don Bosco" }
+    ];
+
+    // ============================================================
+    // RENDER TOPPERS
+    // ============================================================
+    function renderToppers() {
+        const tbody = document.getElementById('toppersBody');
+        tbody.innerHTML = '';
+        toppersData.forEach((t, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="rank">${i + 1}</td>
+                <td class="editable" contenteditable="false">${t.name}</td>
+                <td class="editable" contenteditable="false">${t.pct}%</td>
+                <td class="school editable" contenteditable="false">${t.school}</td>
+                <td><button class="delete-row" onclick="deleteTopperRow(this)"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    renderToppers();
+
+    function deleteTopperRow(btn) {
+        const tr = btn.closest('tr');
+        tr.remove();
+        showToast('🗑️ Removed');
+        document.querySelectorAll('#toppersBody tr').forEach((row, i) => {
+            row.querySelector('.rank').textContent = i + 1;
+        });
+    }
+
+    document.getElementById('addTopperBtn').addEventListener('click', function() {
+        const name = prompt('Enter student name:');
+        if (!name) return;
+        const pct = prompt('Enter percentage:');
+        if (!pct) return;
+        const school = prompt('Enter school name:') || '';
+        const tbody = document.getElementById('toppersBody');
+        const row = document.createElement('tr');
+        const rank = tbody.children.length + 1;
+        row.innerHTML = `
+            <td class="rank">${rank}</td>
+            <td class="editable" contenteditable="false">${name}</td>
+            <td class="editable" contenteditable="false">${pct}%</td>
+            <td class="school editable" contenteditable="false">${school}</td>
+            <td><button class="delete-row" onclick="deleteTopperRow(this)"><i class="fas fa-trash-alt"></i></button></td>
+        `;
+        tbody.appendChild(row);
+        if (editMode) {
+            row.querySelectorAll('.editable').forEach(el => el.contentEditable = 'true');
+        }
+        showToast('✅ Topper added');
+    });
+
+    // ============================================================
+    // TOAST
+    // ============================================================
     function showToast(msg) {
         const t = document.getElementById('toast');
         document.getElementById('toastMessage').textContent = msg;
@@ -715,7 +1121,9 @@
         t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== NAVIGATION =====
+    // ============================================================
+    // NAVIGATION
+    // ============================================================
     document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -727,7 +1135,9 @@
         });
     });
 
-    // ===== EDIT MODE – 10 taps on logo =====
+    // ============================================================
+    // EDIT MODE – 10 taps on logo
+    // ============================================================
     let tapCount = 0;
     let editMode = false;
     const logo = document.getElementById('logoTrigger');
@@ -764,7 +1174,9 @@
         }
     }
 
-    // ===== EDITABLE IMAGES =====
+    // ============================================================
+    // EDITABLE IMAGES – click in edit mode to change URL
+    // ============================================================
     document.addEventListener('click', function(e) {
         const img = e.target.closest('.editable-image');
         if (!img) return;
@@ -777,7 +1189,117 @@
         }
     });
 
-    // ===== LANGUAGE SWITCHER =====
+    // ============================================================
+    // GALLERY IMAGE UPLOAD
+    // ============================================================
+    const fileInput = document.getElementById('imageFileInput');
+    const previewContainer = document.getElementById('uploadPreview');
+    const uploadBtn = document.getElementById('uploadImageBtn');
+
+    fileInput.addEventListener('change', function(e) {
+        const files = Array.from(this.files);
+        previewContainer.innerHTML = '';
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const div = document.createElement('div');
+                div.className = 'preview-item';
+                div.innerHTML = `<img src="${ev.target.result}" alt="${file.name}" /><button class="remove-preview" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`;
+                previewContainer.appendChild(div);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    uploadBtn.addEventListener('click', function() {
+        const files = fileInput.files;
+        if (!files.length) {
+            showToast('⚠️ Please select images first');
+            return;
+        }
+        const gallery = document.getElementById('imageGallery');
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="${ev.target.result}" alt="${file.name}" class="editable-image" /><div class="badge">Uploaded</div><div class="overlay">${file.name}</div><button class="delete-btn" onclick="deleteGalleryItem(this)"><i class="fas fa-times"></i></button>`;
+                gallery.prepend(item);
+            };
+            reader.readAsDataURL(file);
+        });
+        document.getElementById('imageUploadStatus').textContent = `✅ ${files.length} image(s) uploaded!`;
+        setTimeout(() => document.getElementById('imageUploadStatus').textContent = '', 3000);
+        fileInput.value = '';
+        previewContainer.innerHTML = '';
+        showToast('📸 Images uploaded successfully');
+    });
+
+    function deleteGalleryItem(btn) { btn.closest('.gallery-item').remove(); showToast('🗑️ Image removed'); }
+
+    // ============================================================
+    // VIDEO GALLERY
+    // ============================================================
+    document.getElementById('addVideoBtn').addEventListener('click', function() {
+        document.getElementById('videoFileInput').click();
+    });
+    document.getElementById('videoFileInput').addEventListener('change', function(e) {
+        const files = this.files;
+        if (!files.length) return;
+        const gallery = document.getElementById('videoGallery');
+        Array.from(files).forEach(file => {
+            const url = URL.createObjectURL(file);
+            const item = document.createElement('div');
+            item.className = 'video-item';
+            item.innerHTML = `<video src="${url}" controls></video><button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button>`;
+            gallery.prepend(item);
+        });
+        document.getElementById('videoUploadStatus').textContent = `✅ ${files.length} video(s) uploaded!`;
+        setTimeout(() => document.getElementById('videoUploadStatus').textContent = '', 3000);
+        this.value = '';
+        showToast('🎬 Videos uploaded');
+    });
+
+    document.getElementById('addYoutubeBtn').addEventListener('click', function() {
+        const link = prompt('Enter YouTube video URL (watch or embed link):');
+        if (!link) return;
+        let embedUrl = link;
+        if (link.includes('watch?v=')) {
+            const id = link.split('v=')[1]?.split('&')[0];
+            if (id) embedUrl = `https://www.youtube.com/embed/${id}`;
+        } else if (link.includes('youtu.be/')) {
+            const id = link.split('youtu.be/')[1]?.split('?')[0];
+            if (id) embedUrl = `https://www.youtube.com/embed/${id}`;
+        }
+        const gallery = document.getElementById('videoGallery');
+        const item = document.createElement('div');
+        item.className = 'video-item';
+        item.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe><div class="youtube-badge">YouTube</div><button class="delete-btn" onclick="deleteVideoItem(this)"><i class="fas fa-times"></i></button>`;
+        gallery.prepend(item);
+        showToast('✅ YouTube video added');
+    });
+
+    function deleteVideoItem(btn) { btn.closest('.video-item').remove(); showToast('🗑️ Video removed'); }
+
+    // ============================================================
+    // DRAG & DROP
+    // ============================================================
+    const zone = document.getElementById('imageUploadZone');
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change'));
+        }
+    });
+
+    // ============================================================
+    // LANGUAGE SWITCHER
+    // ============================================================
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -790,7 +1312,7 @@
 
     document.body.className = 'lang-en';
     toggleEditMode(false);
-    console.log('🏛️ Shree Parth Academy – All images set.');
+    console.log('🏛️ Shree Parth Academy – All pages ready.');
 </script>
 </body>
-</html>
+                                                                                                    </html>
