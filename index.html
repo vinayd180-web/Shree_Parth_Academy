@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shree Parth Academy · An Emperor of Knowledge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --primary: #0a1628;
+            --gold: #d4a843;
+            --gold-light: #f0d080;
+            --gold-gradient: linear-gradient(135deg, #d4a843, #f0d080);
+            --white: #ffffff;
+            --light-bg: #f8f4ef;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --radius: 20px;
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            --font-serif: 'Playfair Display', serif;
+        }
+        body { font-family:'Inter',sans-serif; background:var(--light-bg); color:var(--primary); line-height:1.6; }
+        .navbar {
+            background: var(--primary);
+            padding: 0.8rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top:0; z-index:1000;
+            border-bottom: 3px solid var(--gold);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: white;
+            font-weight: 800;
+            font-size: 1.6rem;
+            font-family: var(--font-serif);
+            cursor: pointer;
+            user-select: none;
+        }
+        .logo img {
+            height: 65px;
+            width: auto;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+            display: block;
+        }
+        .logo .logo-text .sub {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 3px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem 1.5rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            background: rgba(255,255,255,0.08);
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+        .page-container { max-width:1200px; margin:0 auto; padding:2rem; }
+        .page { display:none; animation:fadeIn 0.5s ease; }
+        .page.active { display:block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(212,168,67,0.15);
+            margin-bottom: 1.5rem;
+        }
+        .card:hover { box-shadow: 0 30px 80px rgba(0,0,0,0.12); transform:translateY(-4px); }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--font-serif);
+        }
+        .section-title i { color: var(--gold); }
+        .section-title::after {
+            content: '';
+            flex:1;
+            height:2px;
+            background: linear-gradient(to right, var(--gold), transparent);
+            margin-left:1rem;
+        }
+        .grid-2col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+        .grid-4col { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; }
+        @media (max-width:768px) {
+            .grid-2col { grid-template-columns:1fr; }
+            .navbar { padding:0.8rem 1rem; }
+            .page-container { padding:1rem; }
+            .section-title { font-size:1.6rem; }
+            .logo img { height:50px; }
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(212,168,67,0.4); }
+
+        .mt-2 { margin-top:1.5rem; }
+        .text-center { text-align:center; }
+
+        /* HERO */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2d4a 100%);
+            border-radius: var(--radius);
+            padding: 4rem 3rem;
+            color: white;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212,168,67,0.2);
+            min-height: 350px;
+        }
+        .hero-section .hero-bg {
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            object-fit:cover;
+            opacity:0.30;
+            z-index:0;
+        }
+        .hero-section .hero-content { position:relative; z-index:1; }
+        .hero-section h1 {
+            font-size:3.5rem; font-weight:900; letter-spacing:-1px;
+            font-family:var(--font-serif);
+        }
+        .hero-section h1 span { color:var(--gold); }
+        .hero-section .tagline {
+            font-size:1.6rem; color:var(--gold); font-weight:600;
+            font-family:var(--font-serif);
+        }
+        .hero-stats {
+            display:flex; gap:3rem; margin-top:2rem; flex-wrap:wrap;
+        }
+        .hero-stats .stat .number {
+            font-size:2.8rem; font-weight:900; color:var(--gold);
+            display:block; font-family:var(--font-serif);
+        }
+        .hero-stats .stat .label { font-size:0.9rem; opacity:0.7; text-transform:uppercase; letter-spacing:1px; }
+
+        /* TRADITION CARDS */
+        .tradition-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--gold);
+        }
+        .tradition-card:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
+        .tradition-card .card-img {
+            width:100%; height:180px; object-fit:cover;
+            border-radius:10px; margin-bottom:0.8rem;
+            border:2px solid var(--gold);
+            background:#f0f0f0;
+        }
+        .tradition-card h3 { font-size:1.2rem; font-family:var(--font-serif); }
+        .tradition-card .marathi { color:#c0392b; font-weight:600; font-size:0.95rem; }
+        .tradition-card p { color:#64748b; font-size:0.95rem; margin-top:0.5rem; }
+
+        .marathi-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid var(--gold);
+        }
+        .marathi-card:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
+        .marathi-card img {
+            width:100%; height:auto; display:block;
+            border-bottom: 2px solid var(--gold);
+        }
+        .marathi-card .caption {
+            padding:1rem; text-align:center;
+            background: #fefcf5; font-weight:500; color: var(--primary);
+        }
+        .marathi-card .caption .en {
+            font-size:0.9rem; color:#64748b; margin-top:0.3rem; font-style:italic;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            aspect-ratio: 1/1;
+            background: #f0f0f0;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .gallery-item:hover { transform:scale(1.02); border-color:var(--gold); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+        .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; }
+        .gallery-item .overlay {
+            position:absolute; bottom:0; left:0; right:0;
+            background:linear-gradient(transparent, rgba(10,22,40,0.8));
+            padding:1.5rem 1rem 0.8rem;
+            color:white; font-weight:600; font-size:0.9rem;
+            transform:translateY(100%);
+            transition:var(--transition);
+        }
+        .gallery-item:hover .overlay { transform:translateY(0); }
+        .gallery-item .badge {
+            position:absolute; top:10px; right:10px;
+            background:var(--gold); color:var(--primary);
+            padding:0.2rem 0.8rem; border-radius:60px;
+            font-size:0.7rem; font-weight:700;
+        }
+
+        .director-photo {
+            width:140px; height:140px; object-fit:cover;
+            border-radius:50%; border:4px solid var(--gold);
+            box-shadow:0 8px 30px rgba(0,0,0,0.15);
+        }
+        @media (max-width:768px) { .director-photo { width:100px; height:100px; } }
+
+        .map-container {
+            border-radius:16px; overflow:hidden;
+            border:3px solid var(--gold);
+            height:300px;
+        }
+        .map-container iframe { width:100%; height:100%; border:none; }
+
+        .social-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+        .social-link {
+            display:inline-flex; align-items:center; gap:0.5rem;
+            padding:0.6rem 1.5rem; border-radius:60px;
+            color:white; font-weight:600; text-decoration:none;
+            transition:var(--transition);
+        }
+        .social-link:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+        .social-link.whatsapp { background:#25D366; }
+        .social-link.telegram { background:#0088cc; }
+        .social-link.phone { background:#c0392b; }
+        .social-link.email { background:#ea4335; }
+        .social-link.instagram { background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .social-link.facebook { background:#1877f2; }
+
+        .payment-options {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+            gap:1rem;
+        }
+        .payment-option {
+            padding:1.5rem; text-align:center;
+            background:#f8fafc; border-radius:16px;
+            border:2px solid #e2e8f0;
+            transition:var(--transition);
+            cursor:pointer;
+        }
+        .payment-option:hover { border-color:var(--gold); background:rgba(212,168,67,0.05); }
+        .payment-option i { font-size:2.5rem; color:var(--gold); display:block; margin-bottom:0.3rem; }
+        .payment-option .label { font-weight:600; }
+
+        .footer {
+            background:var(--primary); color:rgba(255,255,255,0.7);
+            padding:3rem 2rem 1.5rem; margin-top:4rem;
+            border-top:4px solid var(--gold);
+        }
+        .footer-grid {
+            max-width:1200px; margin:0 auto;
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+            gap:2.5rem;
+        }
+        .footer h4 { color:white; font-size:1.1rem; margin-bottom:1rem; border-bottom:2px solid var(--gold); padding-bottom:0.5rem; display:inline-block; font-family:var(--font-serif); }
+        .footer p { margin:0.5rem 0; font-size:0.95rem; }
+        .footer .footer-logo { display:flex; align-items:center; gap:12px; }
+        .footer .footer-logo img { height:50px; width:auto; background:transparent; border:none; object-fit:contain; }
+        .footer-bottom { text-align:center; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); font-size:0.9rem; opacity:0.6; }
+
+        .toast {
+            position:fixed; bottom:2rem; right:2rem;
+            background:var(--primary); color:white;
+            padding:1rem 2rem; border-radius:12px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.2);
+            transform:translateY(100px); opacity:0;
+            transition:all 0.5s ease;
+            z-index:9999;
+            border-left:4px solid var(--gold);
+            max-width:400px;
+        }
+        .toast.show { transform:translateY(0); opacity:1; }
+        .toast i { margin-right:10px; color:var(--gold); }
+
+        .edit-toggle {
+            display:none;
+            position:fixed; bottom:20px; right:20px;
+            background:var(--gold); color:var(--primary);
+            border:none; border-radius:60px;
+            padding:0.8rem 1.8rem; font-weight:700;
+            cursor:pointer; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+            z-index:999; transition:var(--transition);
+        }
+        .edit-toggle.visible { display:block; }
+        .edit-toggle:hover { transform:scale(1.05); }
+
+        .editable {
+            outline:2px dashed transparent;
+            transition:outline 0.2s, background 0.2s;
+            padding:2px 4px; border-radius:4px; cursor:default;
+        }
+        .edit-mode .editable {
+            cursor:text;
+            outline:2px dashed rgba(212,168,67,0.3);
+        }
+        .edit-mode .editable:hover { background:rgba(212,168,67,0.05); }
+        .edit-mode .editable:focus { outline:2px solid var(--gold); background:rgba(212,168,67,0.1); }
+        .editable-image {
+            cursor:pointer; transition:var(--transition); position:relative;
+        }
+        .edit-mode .editable-image::after {
+            content:'✎'; position:absolute; top:50%; left:50%;
+            transform:translate(-50%,-50%);
+            background:rgba(0,0,0,0.6); color:white;
+            padding:0.5rem 1rem; border-radius:60px;
+            font-size:1.2rem; opacity:0;
+            transition:opacity 0.3s; pointer-events:none;
+        }
+        .edit-mode .editable-image:hover::after { opacity:1; }
+
+        .upload-zone {
+            border:3px dashed #cbd5e1; border-radius:16px;
+            padding:2rem 1.5rem; text-align:center;
+            background:#fafdff; transition:var(--transition);
+            cursor:pointer; display:none;
+        }
+        .upload-zone.visible { display:block; }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color:var(--gold); background:#fefcf5;
+        }
+        .upload-zone i { font-size:3rem; color:var(--gold); opacity:0.5; margin-bottom:0.3rem; }
+        .upload-zone input[type="file"] { display:none; }
+
+        .add-btn {
+            background:var(--gold); color:var(--primary);
+            border:none; padding:0.4rem 1.4rem;
+            border-radius:60px; font-weight:600;
+            cursor:pointer; transition:var(--transition);
+            font-size:0.9rem; display:none;
+        }
+        .edit-mode .add-btn { display:inline-block; }
+        .add-btn:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(212,168,67,0.3); }
+
+        .lang-switcher {
+            display:flex; gap:0.3rem;
+            background:rgba(255,255,255,0.1);
+            padding:0.2rem; border-radius:60px;
+            border:1px solid rgba(255,255,255,0.1);
+        }
+        .lang-btn {
+            padding:0.3rem 0.8rem; border-radius:60px;
+            border:none; background:transparent;
+            color:rgba(255,255,255,0.6); font-weight:600;
+            font-size:0.7rem; cursor:pointer;
+            transition:var(--transition); text-transform:uppercase;
+        }
+        .lang-btn.active { background:var(--gold); color:var(--primary); }
+        .lang-btn:hover:not(.active) { color:white; }
+
+        [data-lang] { display:none; }
+        .lang-en [data-lang="en"], .lang-mr [data-lang="mr"], .lang-semi [data-lang="semi"] { display:inline; }
+    </style>
+</head>
+<body>
+
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Success!</span></div>
+<button class="edit-toggle" id="editToggleBtn"><i class="fas fa-pen"></i> Edit Mode</button>
+
+<nav class="navbar">
+    <div class="logo" id="logoTrigger">
+        <!-- NEW LOGO URL -->
+        <img src="https://i.postimg.cc/6y1ZG0hj/SHREE-PARTH-ACADEMY-84-x-44.png" alt="Shree Parth Academy Logo" />
+        <div class="logo-text">
+            <span class="editable" contenteditable="false">Shree Parth Academy</span>
+            <span class="sub">✦ AN EMPEROR OF KNOWLEDGE ✦</span>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a class="active" data-page="home"><i class="fas fa-home"></i> <span data-lang="en">Home</span><span data-lang="mr">मुख्यपृष्ठ</span><span data-lang="semi">Home</span></a>
+        <a data-page="about"><i class="fas fa-info-circle"></i> <span data-lang="en">About</span><span data-lang="mr">आमच्याबद्दल</span><span data-lang="semi">About</span></a>
+        <a data-page="payment"><i class="fas fa-credit-card"></i> <span data-lang="en">Pay</span><span data-lang="mr">पैसे द्या</span><span data-lang="semi">Pay</span></a>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="mr">मर</button>
+            <button class="lang-btn" data-lang="semi">SEMI</button>
+        </div>
+    </div>
+</nav>
+
+<div class="page-container">
+
+    <!-- HOME -->
+    <div id="homePage" class="page active">
+        <div class="hero-section">
+            <!-- NEW BACKGROUND URL -->
+            <img src="https://i.postimg.cc/tJ85n9Bp/IMG-20260703-WA0015.jpg" alt="Hero Background" class="hero-bg" />
+            <div class="hero-content">
+                <h1>An Emperor of <span class="editable" contenteditable="false">Knowledge</span></h1>
+                <div class="tagline">⚜️ Shree Parth Academy</div>
+                <p class="editable" contenteditable="false">Established Since 2009 • "We strive for our student's success."</p>
+                <div class="hero-stats">
+                    <div class="stat"><span class="number">2009</span><span class="label">Established</span></div>
+                    <div class="stat"><span class="number">5000+</span><span class="label">Students</span></div>
+                    <div class="stat"><span class="number">98%</span><span class="label">Success Rate</span></div>
+                    <div class="stat"><span class="number">50+</span><span class="label">Expert Teachers</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MARATHI PHILOSOPHY CARDS (Contextually relevant) -->
+        <h2 class="section-title"><i class="fas fa-quote-right"></i> Our Philosophy in Marathi</h2>
+        <div class="grid-4col">
+            <div class="marathi-card">
+                <img src="https://i.postimg.cc/1VykHvCw/IMG-20260707-WA0013.jpg" alt="Philosophy 1" class="editable-image" />
+                <div class="caption">
+                    <span class="editable" contenteditable="false">उद्याच्या सुवर्ण भविष्यासाठी एक उत्कृष्ट शैक्षणिक संस्था</span>
+                    <div class="en editable" contenteditable="false">An excellent educational institution for a golden future tomorrow.</div>
+                </div>
+            </div>
+            <div class="marathi-card">
+                <img src="https://i.postimg.cc/K3m6N0qM/IMG-20260707-WA0014.jpg" alt="Philosophy 2" class="editable-image" />
+                <div class="caption">
+                    <span class="editable" contenteditable="false">आम्ही स्पर्धक नाही, गुणवंत विद्यार्थी घडवतो</span>
+                    <div class="en editable" contenteditable="false">We are not competitors; we sculpt meritorious students.</div>
+                </div>
+            </div>
+            <div class="marathi-card">
+                <img src="https://i.postimg.cc/GTbWQX7T/IMG-20260707-WA0015.jpg" alt="Philosophy 3" class="editable-image" />
+                <div class="caption">
+                    <span class="editable" contenteditable="false">शिस्त आणि अनुभव हीच आमची ओळख</span>
+                    <div class="en editable" contenteditable="false">Discipline and experience are our identity.</div>
+                </div>
+            </div>
+            <div class="marathi-card">
+                <img src="https://i.postimg.cc/4HXD5WLP/IMG-20260707-WA0010.jpg" alt="Philosophy 4" class="editable-image" />
+                <div class="caption">
+                    <span class="editable" contenteditable="false">यशस्वी निकालाची परंपरा</span>
+                    <div class="en editable" contenteditable="false">A tradition of successful results.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACADEMIC TRADITIONS -->
+        <h2 class="section-title mt-2"><i class="fas fa-landmark"></i> Our Academic Traditions</h2>
+        <div class="grid-4col">
+            <div class="tradition-card">
+                <img src="https://i.postimg.cc/z35Y8fJ9/IMG-20260707-WA0005.jpg" class="card-img editable-image" />
+                <h3 class="editable" contenteditable="false">Success History</h3>
+                <div class="marathi editable" contenteditable="false">यशस्वी निकालाची परंपरा</div>
+                <p class="editable" contenteditable="false">A rich heritage of excellent student outcomes.</p>
+            </div>
+            <div class="tradition-card">
+                <img src="https://i.postimg.cc/mhRWBrbq/IMG-20260707-WA0006.jpg" class="card-img editable-image" />
+                <h3 class="editable" contenteditable="false">Our Blueprint</h3>
+                <div class="marathi editable" contenteditable="false">आमचा निकाल हेच आमचे वैशिष्ट्ये</div>
+                <p class="editable" contenteditable="false">Uncompromising quality delivery is our identity.</p>
+            </div>
+            <div class="tradition-card">
+                <img src="https://i.postimg.cc/4HXD5WLB/IMG-20260707-WA0007.jpg" class="card-img editable-image" />
+                <h3 class="editable" contenteditable="false">Character Building</h3>
+                <div class="marathi editable" contenteditable="false">आम्ही स्पर्धक नाही, गुणवंत विद्यार्थी घडवतो</div>
+                <p class="editable" contenteditable="false">We cultivate meritorious individuals.</p>
+            </div>
+            <div class="tradition-card">
+                <img src="https://i.postimg.cc/q6pPL1bQ/IMG-20260707-WA0008.jpg" class="card-img editable-image" />
+                <h3 class="editable" contenteditable="false">Our Foundation</h3>
+                <div class="marathi editable" contenteditable="false">शिस्त आणि अनुभव हीच आमची ओळख</div>
+                <p class="editable" contenteditable="false">Strict discipline & deep teaching knowledge.</p>
+            </div>
+        </div>
+
+        <!-- CONTACT & TIMINGS -->
+        <div class="card">
+            <div class="grid-2col">
+                <div>
+                    <h3><i class="fas fa-address-card" style="color:var(--gold);"></i> Get in Touch</h3>
+                    <p class="editable" contenteditable="false"><i class="fas fa-phone"></i> +91 9221838267 | +91 9011395913</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-envelope"></i> shreeparthacademy2009@gmail.com</p>
+                    <p class="editable" contenteditable="false"><i class="fas fa-map-marker-alt"></i> Ground Floor, Tryambak Heaven 2, Beside Of Holy Spirit High School, Surval Chowk, Midc Shirgaon, Badlapur (E).</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-clock" style="color:var(--gold);"></i> Timings</h3>
+                    <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches</p>
+                    <p class="editable" contenteditable="false">Sunday: Moderator Sessions</p>
+                    <p style="color:var(--gold); font-weight:700;">✦ ESTD: 2009 ✦</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUALITY vs QUANTITY -->
+        <div class="card" style="background:linear-gradient(135deg, var(--primary), #1a2d4a); color:white; text-align:center;">
+            <h2 style="color:var(--gold); font-family:var(--font-serif);" class="editable" contenteditable="false">What do you prefer? Quality or Quantity?</h2>
+            <p style="max-width:600px; margin:0.5rem auto;" class="editable" contenteditable="false">If your primary requirement is focused, premium‑tier individual academic support, call our enrollment desk today!</p>
+            <button class="btn-gold" onclick="showToast('📞 Call us at +91 9011395913')"><i class="fas fa-phone"></i> Contact Now</button>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <h2 class="section-title mt-2"><i class="fas fa-share-alt"></i> Connect With Us</h2>
+        <div class="card text-center">
+            <div class="social-links">
+                <a href="https://wa.me/919011395913" target="_blank" class="social-link whatsapp"><i class="fab fa-whatsapp"></i> <span class="editable" contenteditable="false">WhatsApp</span></a>
+                <a href="https://t.me/ShreeParthAcademy" target="_blank" class="social-link telegram"><i class="fab fa-telegram-plane"></i> <span class="editable" contenteditable="false">Telegram</span></a>
+                <a href="tel:+919011395913" class="social-link phone"><i class="fas fa-phone"></i> <span class="editable" contenteditable="false">Call Now</span></a>
+                <a href="mailto:shreeparthacademy2009@gmail.com" class="social-link email"><i class="fas fa-envelope"></i> <span class="editable" contenteditable="false">Email</span></a>
+                <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i> <span class="editable" contenteditable="false">Instagram</span></a>
+                <a href="#" class="social-link facebook"><i class="fab fa-facebook"></i> <span class="editable" contenteditable="false">Facebook</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="aboutPage" class="page">
+        <h2 class="section-title"><i class="fas fa-building-columns"></i> About Us</h2>
+        <div class="grid-2col">
+            <div>
+                <div class="card card-premium">
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p class="editable" contenteditable="false">To Enable The Students Success Beyond Excellence In Their Life Long Pursuit Of Knowledge And In Their Contribution As Responsible Citizens In A Rapidly Changing Globalized World.</p>
+                    <br>
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p class="editable" contenteditable="false">To Become A Standard Of Excellence Fostering Intellect, Creativity And Character In An Active, Student Centered Learning Community.</p>
+                    <br>
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-heart"></i> Our Motive</h3>
+                    <p class="editable" contenteditable="false">"In Every Child There Is A Hidden Warrior. It Only Requires Self Confidence And Proper Guidance."</p>
+                </div>
+            </div>
+            <div>
+                <div class="card card-premium">
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-clock"></i> Our Journey</h3>
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                        <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2009</span>
+                        <span class="editable" contenteditable="false">Founded with a vision of excellence</span>
+                    </div>
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                        <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2015</span>
+                        <span class="editable" contenteditable="false">Expanded to 500+ students</span>
+                    </div>
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0; border-bottom:1px solid #e2e8f0;">
+                        <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2020</span>
+                        <span class="editable" contenteditable="false">Digital transformation & E‑Learning</span>
+                    </div>
+                    <div style="display:flex; gap:1.5rem; padding:0.8rem 0;">
+                        <span style="font-weight:800; color:var(--gold); min-width:80px; font-size:1.1rem; font-family:var(--font-serif);">2024</span>
+                        <span class="editable" contenteditable="false">World‑Class curriculum & facilities</span>
+                    </div>
+                </div>
+                <div class="card card-premium mt-2">
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-user-tie"></i> Director's Desk</h3>
+                    <div style="display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
+                        <!-- NEW DIRECTOR PHOTO -->
+                        <img src="https://i.postimg.cc/vcSn6zv5/file-0000000048b0720b861f556150fbb74b.png" alt="Director" class="director-photo editable-image" />
+                        <div>
+                            <p class="editable" contenteditable="false"><strong>Mr. Swapnil Kalaskar</strong></p>
+                            <p class="editable" contenteditable="false">With over 15 years of experience in education, our director envisions a learning environment where every child discovers their true potential. We believe in holistic development that goes beyond textbooks.</p>
+                        </div>
+                    </div>
+                    <p class="editable mt-2" contenteditable="false">"We are not competitors; we are sculptors of future leaders."</p>
+                </div>
+                <div class="card card-premium mt-2">
+                    <h3 style="color:var(--gold); font-family:var(--font-serif);"><i class="fas fa-map-pin"></i> Our Location</h3>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.456789012345!2d73.12345678901234!3d19.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDA3JzI0LjUiTiA3M8KwMDcnMjQuNSJF!5e0!3m2!1sen!2sin!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div id="paymentPage" class="page">
+        <h2 class="section-title"><i class="fas fa-credit-card"></i> Payment Portal</h2>
+        <div class="grid-2col">
+            <div>
+                <div class="card card-premium">
+                    <h3><i class="fas fa-hand-holding-usd" style="color:var(--gold);"></i> Make a Payment</h3>
+                    <div class="form-group"><label>Amount (₹)</label><input type="number" value="5000" class="editable" contenteditable="false" style="width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem;" /></div>
+                    <div class="form-group"><label>Payment For</label><select class="editable" contenteditable="false" style="width:100%; padding:0.8rem 1rem; border:2px solid #e2e8f0; border-radius:12px; font-size:1rem;"><option>Tuition Fees</option><option>Exam Fees</option><option>Library Fees</option><option>Other</option></select></div>
+                    <button class="btn-gold" onclick="showToast('💳 Payment initiated! Please scan QR or use UPI to complete.')"><i class="fas fa-lock"></i> Pay Now</button>
+                </div>
+            </div>
+            <div>
+                <div class="card card-premium">
+                    <h3><i class="fas fa-qrcode" style="color:var(--gold);"></i> Quick Pay Options</h3>
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="showToast('📱 UPI: shreeparth@upi')"><i class="fas fa-mobile-alt"></i><span class="label editable" contenteditable="false">UPI</span></div>
+                        <div class="payment-option" onclick="showToast('💳 Card payment coming soon')"><i class="fas fa-credit-card"></i><span class="label editable" contenteditable="false">Card</span></div>
+                        <div class="payment-option" onclick="showToast('🏦 Bank details shown below')"><i class="fas fa-university"></i><span class="label editable" contenteditable="false">Bank</span></div>
+                        <div class="payment-option" onclick="showToast('📱 PhonePe: +91 9011395913')"><i class="fas fa-phone"></i><span class="label editable" contenteditable="false">PhonePe</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <h4 style="color:var(--gold);"><i class="fas fa-qrcode"></i> Scan to Pay (UPI)</h4>
+                        <div style="display:flex; justify-content:center; margin:1rem 0;">
+                            <img src="https://i.postimg.cc/tJ85n9Bp/IMG-20260703-WA0015.jpg" alt="UPI QR Code" style="max-width:200px; border:2px solid var(--gold); border-radius:12px; padding:8px; background:white;" class="editable-image" />
+                        </div>
+                        <p class="text-center editable" contenteditable="false"><strong>UPI ID:</strong> shreeparth@upi</p>
+                    </div>
+                    <div class="mt-2">
+                        <h4 style="color:var(--gold);"><i class="fas fa-university"></i> Bank Transfer Details</h4>
+                        <div style="background:#f8fafc; padding:1rem; border-radius:12px; border:1px solid #e2e8f0;" class="editable" contenteditable="false">
+                            <p><strong>Bank Name:</strong> HDFC Bank</p>
+                            <p><strong>Account Name:</strong> Shree Parth Academy</p>
+                            <p><strong>Account Number:</strong> 1234567890</p>
+                            <p><strong>IFSC Code:</strong> HDFC0001234</p>
+                            <p><strong>Branch:</strong> Badlapur (E), Maharashtra</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <div class="footer-logo">
+                <img src="https://i.postimg.cc/6y1ZG0hj/SHREE-PARTH-ACADEMY-84-x-44.png" alt="Logo" />
+                <div><h4 style="border:none; margin:0;">Shree Parth Academy</h4><p style="color:var(--gold);">An Emperor of Knowledge</p></div>
+            </div>
+            <p>ESTD: 2009</p>
+            <p style="color:var(--gold);">"We strive for our student's success."</p>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <p><i class="fas fa-phone"></i> <span class="editable" contenteditable="false">+91 9011395913</span></p>
+            <p><i class="fas fa-phone"></i> <span class="editable" contenteditable="false">+91 9221838267</span></p>
+            <p><i class="fas fa-phone"></i> <span class="editable" contenteditable="false">+91 7709935795</span></p>
+            <p><i class="fas fa-envelope"></i> <span class="editable" contenteditable="false">shreeparthacademy2009@gmail.com</span></p>
+        </div>
+        <div>
+            <h4>Location</h4>
+            <p class="editable" contenteditable="false">Ground Floor, Tryambak Heaven 2,<br>Beside Holy Spirit High School,<br>Surval Chowk, Midc Shirgaon,<br>Badlapur (E).</p>
+        </div>
+        <div>
+            <h4>Timings</h4>
+            <p class="editable" contenteditable="false">Mon‑Sat: Regular Batches</p>
+            <p class="editable" contenteditable="false">Sunday: Moderator Sessions</p>
+            <p style="color:var(--gold); font-weight:700; font-family:var(--font-serif);">✦ ESTD: 2009 ✦</p>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Shree Parth Academy. All Rights Reserved.</p></div>
+</footer>
+
+<script>
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMessage').textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timeout);
+        t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ===== NAVIGATION =====
+    document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = this.dataset.page;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + 'Page').classList.add('active');
+            document.querySelectorAll('.nav-links a[data-page]').forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // ===== EDIT MODE – 10 taps on logo =====
+    let tapCount = 0;
+    let editMode = false;
+    const logo = document.getElementById('logoTrigger');
+    const editToggleBtn = document.getElementById('editToggleBtn');
+
+    logo.addEventListener('click', function(e) {
+        if (!editMode) {
+            tapCount++;
+            if (tapCount >= 10) {
+                toggleEditMode(true);
+                tapCount = 0;
+            }
+        }
+    });
+
+    editToggleBtn.addEventListener('click', function() {
+        toggleEditMode(!editMode);
+    });
+
+    function toggleEditMode(enable) {
+        editMode = enable;
+        document.body.classList.toggle('edit-mode', editMode);
+        document.querySelectorAll('.upload-zone').forEach(el => el.classList.toggle('visible', editMode));
+        document.querySelectorAll('.add-btn').forEach(el => el.style.display = editMode ? 'inline-block' : 'none');
+        editToggleBtn.classList.toggle('visible', editMode);
+        editToggleBtn.textContent = editMode ? '🔓 Exit Edit Mode' : '🔒 Edit Mode';
+        document.querySelectorAll('.editable').forEach(el => {
+            el.contentEditable = editMode ? 'true' : 'false';
+        });
+        if (editMode) {
+            showToast('✏️ Edit mode activated – click any image to change its URL.');
+        } else {
+            showToast('💾 Changes saved.');
+        }
+    }
+
+    // ===== EDITABLE IMAGES =====
+    document.addEventListener('click', function(e) {
+        const img = e.target.closest('.editable-image');
+        if (!img) return;
+        if (!editMode) return;
+        const currentSrc = img.getAttribute('src');
+        const newUrl = prompt('Enter new image URL:', currentSrc);
+        if (newUrl && newUrl.trim() !== '') {
+            img.setAttribute('src', newUrl.trim());
+            showToast('🖼️ Image updated');
+        }
+    });
+
+    // ===== LANGUAGE SWITCHER =====
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const lang = this.dataset.lang;
+            document.body.className = 'lang-' + lang;
+            showToast('🌐 Language switched to ' + this.textContent);
+        });
+    });
+
+    document.body.className = 'lang-en';
+    toggleEditMode(false);
+    console.log('🏛️ Shree Parth Academy – All images set.');
+</script>
+</body>
+</html>
