@@ -308,7 +308,7 @@
         .tradition-card .marathi { color:var(--pink); font-weight:600; font-size:0.95rem; font-family:var(--font-devanagari); }
         .tradition-card p { color:#b0b0b0; font-size:0.95rem; margin-top:0.5rem; }
 
-        /* Marathi Cards - 15% hidden (phone numbers gone) */
+        /* Marathi Cards - 15% hidden */
         .marathi-card {
             background:rgba(255,255,255,0.06);
             backdrop-filter:blur(4px);
@@ -345,7 +345,7 @@
         }
         .marathi-card .caption .en { font-size:0.9rem; color:#b0b0b0; margin-top:0.3rem; font-style:italic; }
 
-        /* Gallery - static */
+        /* Gallery - static with admin support */
         .image-gallery {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
@@ -395,8 +395,20 @@
             font-size:0.7rem; font-weight:700;
             box-shadow:0 0 20px rgba(255,215,0,0.3);
         }
+        /* Admin delete button for gallery */
+        .gallery-item .admin-delete {
+            display:none;
+            position:absolute; top:10px; left:10px;
+            background:rgba(200,0,0,0.8);
+            color:white; border:none; border-radius:50%;
+            width:28px; height:28px;
+            font-size:14px; cursor:pointer;
+            align-items:center; justify-content:center;
+            z-index:10;
+        }
+        .admin-mode .gallery-item .admin-delete { display:flex; }
 
-        /* Videos - static */
+        /* Videos - static with admin support */
         .video-gallery {
             display:grid;
             grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
@@ -426,6 +438,18 @@
             font-size:0.7rem; font-weight:600;
             box-shadow:0 2px 8px rgba(0,0,0,0.3);
         }
+        /* Admin delete button for videos */
+        .video-item .admin-delete {
+            display:none;
+            position:absolute; top:10px; left:10px;
+            background:rgba(200,0,0,0.8);
+            color:white; border:none; border-radius:50%;
+            width:28px; height:28px;
+            font-size:14px; cursor:pointer;
+            align-items:center; justify-content:center;
+            z-index:10;
+        }
+        .admin-mode .video-item .admin-delete { display:flex; }
 
         /* Director */
         .director-photo {
@@ -529,6 +553,129 @@
         ::-webkit-scrollbar { width:8px; }
         ::-webkit-scrollbar-track { background:#0a0618; }
         ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:4px; box-shadow:0 0 20px rgba(255,215,0,0.3); }
+
+        /* ============================================================ */
+        /* ADMIN PANEL STYLES */
+        /* ============================================================ */
+        .admin-lock {
+            position:fixed; bottom:20px; left:20px;
+            color:rgba(255,215,0,0.15);
+            font-size:1.2rem;
+            cursor:pointer;
+            transition:var(--transition);
+            z-index:999;
+        }
+        .admin-lock:hover { color:var(--gold); }
+
+        .admin-panel {
+            display:none;
+            position:fixed;
+            top:50%; left:50%;
+            transform:translate(-50%, -50%);
+            background:rgba(10,6,24,0.95);
+            backdrop-filter:blur(12px);
+            border:2px solid var(--gold);
+            border-radius:var(--radius);
+            padding:2rem;
+            max-width:500px;
+            width:90%;
+            z-index:9999;
+            box-shadow:0 0 60px rgba(0,0,0,0.8);
+        }
+        .admin-panel.visible { display:block; }
+
+        .admin-panel h2 {
+            color:var(--gold);
+            font-family:var(--font-serif);
+            margin-bottom:1rem;
+            text-align:center;
+        }
+
+        .admin-panel .admin-input {
+            width:100%;
+            padding:0.8rem 1rem;
+            margin-bottom:1rem;
+            border:2px solid rgba(255,215,0,0.2);
+            border-radius:10px;
+            background:rgba(255,255,255,0.05);
+            color:white;
+            font-size:1rem;
+        }
+        .admin-panel .admin-input:focus {
+            border-color:var(--gold);
+            outline:none;
+        }
+
+        .admin-panel .admin-btn {
+            width:100%;
+            padding:0.8rem;
+            border:none;
+            border-radius:10px;
+            background:var(--gold);
+            color:#0a0618;
+            font-weight:700;
+            font-size:1rem;
+            cursor:pointer;
+            transition:var(--transition);
+            margin-bottom:0.5rem;
+        }
+        .admin-panel .admin-btn:hover { transform:scale(1.02); box-shadow:0 0 20px rgba(255,215,0,0.3); }
+
+        .admin-panel .admin-close {
+            position:absolute; top:10px; right:15px;
+            color:white; font-size:1.5rem;
+            cursor:pointer;
+            background:none; border:none;
+            transition:var(--transition);
+        }
+        .admin-panel .admin-close:hover { color:var(--gold); transform:rotate(90deg); }
+
+        .admin-panel .admin-section {
+            border-top:1px solid rgba(255,215,0,0.1);
+            padding-top:1rem;
+            margin-top:1rem;
+        }
+        .admin-panel .admin-section-title {
+            color:#b0b0b0;
+            font-size:0.9rem;
+            font-weight:600;
+            margin-bottom:0.5rem;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .admin-overlay {
+            display:none;
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.6);
+            z-index:9998;
+        }
+        .admin-overlay.visible { display:block; }
+
+        .admin-panel .status-msg {
+            text-align:center;
+            margin-top:0.5rem;
+            font-size:0.9rem;
+            color:var(--gold);
+        }
+
+        /* Social Links - Icons only */
+        .social-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+        .social-link {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:50px; height:50px;
+            border-radius:50%;
+            color:white; font-size:1.3rem; text-decoration:none;
+            transition:var(--transition);
+            box-shadow:0 4px 12px rgba(0,0,0,0.2);
+        }
+        .social-link:hover { transform:translateY(-4px) scale(1.08); box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+        .social-link.whatsapp { background:#25D366; }
+        .social-link.telegram { background:#0088cc; }
+        .social-link.phone { background:#c0392b; }
+        .social-link.email { background:#ea4335; }
+        .social-link.instagram { background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .social-link.facebook { background:#1877f2; }
     </style>
 </head>
 <body>
@@ -545,6 +692,49 @@
 
 <!-- Toast -->
 <div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Success!</span></div>
+
+<!-- Admin Lock (click to open admin panel) -->
+<div class="admin-lock" id="adminLock" title="Admin Panel (Click to enter)">
+    <i class="fas fa-lock"></i>
+</div>
+
+<!-- Admin Overlay -->
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+    <button class="admin-close" id="adminClose"><i class="fas fa-times"></i></button>
+    <h2><i class="fas fa-shield-alt"></i> Admin Panel</h2>
+    
+    <div id="adminLogin">
+        <input type="password" class="admin-input" id="adminPassword" placeholder="Enter Password" />
+        <button class="admin-btn" id="adminLoginBtn">Unlock</button>
+        <div class="status-msg" id="loginStatus"></div>
+    </div>
+
+    <div id="adminContent" style="display:none;">
+        <div class="admin-section">
+            <div class="admin-section-title"><i class="fas fa-image"></i> Gallery</div>
+            <input type="text" class="admin-input" id="newImageUrl" placeholder="Paste image URL here" />
+            <button class="admin-btn" id="addImageBtn">+ Add Image to Gallery</button>
+        </div>
+
+        <div class="admin-section">
+            <div class="admin-section-title"><i class="fas fa-video"></i> Videos</div>
+            <input type="text" class="admin-input" id="newVideoUrl" placeholder="Paste YouTube embed URL here" />
+            <button class="admin-btn" id="addVideoBtn">+ Add Video to Gallery</button>
+        </div>
+
+        <div class="admin-section">
+            <div class="admin-section-title"><i class="fas fa-info-circle"></i> Instructions</div>
+            <p style="color:#b0b0b0; font-size:0.85rem; text-align:center;">
+                Click the <i class="fas fa-trash-alt" style="color:#e74c3c;"></i> button on any image or video to delete it.
+            </p>
+        </div>
+        
+        <div class="status-msg" id="adminStatus"></div>
+    </div>
+</div>
 
 <!-- Navbar -->
 <nav class="navbar">
@@ -695,12 +885,12 @@
         <h2 class="section-title mt-2"><i class="fas fa-share-alt"></i> Connect With Us</h2>
         <div class="card text-center">
             <div class="social-links">
-                <a href="https://wa.me/919011395913" target="_blank" class="social-link whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="https://t.me/ShreeParthAcademy" target="_blank" class="social-link telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
-                <a href="tel:+919011395913" class="social-link phone"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="mailto:shreeparthacademy2009@gmail.com" class="social-link email"><i class="fas fa-envelope"></i> Email</a>
-                <a href="https://instagram.com/shreeparthacademy" target="_blank" class="social-link instagram"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://facebook.com/shreeparthacademy" target="_blank" class="social-link facebook"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://wa.me/919011395913" target="_blank" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/ShreeParthAcademy" target="_blank" class="social-link telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="tel:+919011395913" class="social-link phone"><i class="fas fa-phone"></i></a>
+                <a href="mailto:shreeparthacademy2009@gmail.com" class="social-link email"><i class="fas fa-envelope"></i></a>
+                <a href="https://instagram.com/shreeparthacademy" target="_blank" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/shreeparthacademy" target="_blank" class="social-link facebook"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
     </div>
@@ -802,14 +992,7 @@
     <div id="galleryPage" class="page">
         <h2 class="section-title"><i class="fas fa-images"></i> Premium Image Gallery</h2>
         <div class="image-gallery" id="imageGallery">
-            <div class="gallery-item"><img src="https://i.postimg.cc/4HXD5WLP/IMG-20260707-WA0010.jpg" alt="Campus" /><div class="badge">Campus</div><div class="overlay">Main Campus</div></div>
-            <div class="gallery-item"><img src="https://i.postimg.cc/64Bk0MjV/IMG-20260707-WA0011.jpg" alt="Faculty" /><div class="badge">Faculty</div><div class="overlay">Expert Teachers</div></div>
-            <div class="gallery-item"><img src="https://i.postimg.cc/wR9CVwfh/IMG-20260707-WA0012.jpg" alt="Students" /><div class="badge">Students</div><div class="overlay">Top Performers</div></div>
-            <div class="gallery-item"><img src="https://i.postimg.cc/1VykHvCw/IMG-20260707-WA0013.jpg" alt="Library" /><div class="badge">Library</div><div class="overlay">Digital Library</div></div>
-            <div class="gallery-item"><img src="https://i.postimg.cc/K3m6N0qM/IMG-20260707-WA0014.jpg" alt="Events" /><div class="badge">Events</div><div class="overlay">Van Bhojan</div></div>
-            <div class="gallery-item"><img src="https://i.postimg.cc/GTbWQX7T/IMG-20260707-WA0015.jpg" alt="Awards" /><div class="badge">Awards</div><div class="overlay">Prize Distribution</div></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=400&fit=crop&crop=center" alt="Education" /><div class="badge">Education</div><div class="overlay">Learning & Growth</div></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=400&fit=crop&crop=center" alt="Knowledge" /><div class="badge">Knowledge</div><div class="overlay">Knowledge is Power</div></div>
+            <!-- Gallery items will be injected here by JavaScript -->
         </div>
     </div>
 
@@ -817,14 +1000,7 @@
     <div id="videosPage" class="page">
         <h2 class="section-title"><i class="fas fa-video"></i> Video Gallery</h2>
         <div class="video-gallery" id="videoGallery">
-            <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/6J7wE0V-R0U" allowfullscreen></iframe>
-                <div class="youtube-badge">YouTube</div>
-            </div>
-            <div class="video-item">
-                <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
-                <div class="youtube-badge">Sample</div>
-            </div>
+            <!-- Video items will be injected here by JavaScript -->
         </div>
     </div>
 
@@ -904,18 +1080,25 @@
             <p>ESTD: 2009</p>
             <p style="color:var(--gold); font-weight:600;">"We strive for our student's success."</p>
         </div>
-        <div>
-            <h4>📞 Contact Us</h4>
-            <div style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); border-radius: 12px; padding: 1rem;">
-                <p style="font-size:1.5rem; font-weight:800; color:var(--gold); text-shadow:0 0 20px rgba(255,215,0,0.2);">
-                    <i class="fas fa-phone"></i> +91 9011395913
-                </p>
-                <p style="color:#b0b0b0; margin-top:0.3rem;">📱 Admission Helpline</p>
-            </div>
-            <p style="margin-top:0.8rem;">
-                <i class="fas fa-envelope" style="color:var(--gold);"></i> shreeparthacademy2009@gmail.com
-            </p>
-        </div>
+        
+          <div>
+    <h4>📞 Contact Us</h4>
+    <div style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); border-radius: 12px; padding: 1rem;">
+        <p style="font-size:1.5rem; font-weight:800; color:var(--gold); text-shadow:0 0 20px rgba(255,215,0,0.2);">
+            <i class="fas fa-phone"></i> +91 9011395913
+        </p>
+        <p style="font-size:1.2rem; font-weight:600; color:white; margin-top:0.3rem;">
+            <i class="fas fa-phone"></i> +91 9221838267
+        </p>
+        <p style="font-size:1.2rem; font-weight:600; color:white; margin-top:0.3rem;">
+            <i class="fas fa-phone"></i> +91 7709935795
+        </p>
+        <p style="color:#b0b0b0; margin-top:0.5rem;">📱 Admission Helpline</p>
+    </div>
+    <p style="margin-top:0.8rem;">
+        <i class="fas fa-envelope" style="color:var(--gold);"></i> shreeparthacademy2009@gmail.com
+    </p>
+</div>
         <div>
             <h4>📍 Location</h4>
             <p>Ground Floor, Tryambak Heaven 2,<br>Beside Holy Spirit High School,<br>Surval Chowk, Midc Shirgaon,<br>Badlapur (E), Maharashtra 421503</p>
@@ -931,6 +1114,220 @@
 </footer>
 
 <script>
+    // ============================================================
+    // INITIAL DATA - ALL IMAGES AND VIDEOS
+    // ============================================================
+    const galleryImages = [
+        { url: "https://i.postimg.cc/KRbRRB50/0M5A5858.jpg", badge: "Event", overlay: "School Event" },
+        { url: "https://i.postimg.cc/GHRHHGjP/DSC-8332.jpg", badge: "DSC", overlay: "DSC Capture" },
+        { url: "https://i.postimg.cc/t7Wsq2Fr/DSC-8333.jpg", badge: "DSC", overlay: "DSC Capture" },
+        { url: "https://i.postimg.cc/D4r0xw7M/file-00000000183071fab7761edb19ea37c8-(1)-png.jpg", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/ThgKdCnm/file-0000000021fc720bae6bcbb2224b096f.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/jCPDxZyz/file-000000002f6c71fa9bc707d01b03d360.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/CdkRhmbq/file-00000000328c720798e1fbfb953c24cc.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/p5frsL2H/file-0000000044ac7208a293d44254d7caa0.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/NLmKspR8/file-000000004ad471fd86e94ba279321b5c.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/K4B1GJt3/file-000000005cb872098a94b4fcf4cc597d.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/vxrT0ZQR/file-00000000770871faa424867c0089f71e.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/bdkZy31C/file-00000000a294720b97796455e2a585e4.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/nMBXF0qP/file-00000000a70c7206a6e8cdd268b25966-(1).png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/3Wmk8n2b/file-00000000be6871f894aa0c4042ded97a.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/BtHjSM2p/file-00000000c3ec72078a1c138e4b334008.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/8sM7ptLZ/file-00000000d6207207897b57e663c7559d.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/LhLJ9NjB/file-00000000f3fc72068430e7ec1970efe9.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/gr8xzN3H/file-00000000f5d071fa99d0a1b2b43a3820.png", badge: "File", overlay: "Document" },
+        { url: "https://i.postimg.cc/1VGXv3yd/IMG-20250622-124021.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/CBfzf4t7/IMG-20250623-WA0007.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/wR835mYc/IMG-20250905-162357.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/WqGz51sn/IMG-20250905-182831.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/N2qL8HvB/IMG-20250905-183210.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/30XNtx3Z/IMG-20250907-183716.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/dkTLT9p3/IMG-20251126-170453.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/hfnffT0w/IMG-20251213-181408.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/D4kmQX3Q/IMG-20251213-181414.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/R6nNnTyz/IMG-20251213-191104.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/64JTVvxB/IMG-20251213-191108.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/S2zJzG5Z/IMG-20251213-WA0025.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/r0tKt9bH/IMG-20260106-175742.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/bG5ZJ56K/IMG-20260201-WA0098.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/qhCzCGYW/IMG-20260217-114830.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/8Jrjrb39/IMG-20260228-174507.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/JDBGBQgf/IMG-20260512-185012.png", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/jwJLJh9Z/IMG-20260703-WA0002.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/Hc7V7tK3/IMG-20260707-WA0013.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/ctRCFLdD/IMG-5402.jpg", badge: "IMG", overlay: "Image" },
+        { url: "https://i.postimg.cc/WDyd3y9K/poster-2026-05-23-074112.png", badge: "Poster", overlay: "Poster" }
+    ];
+
+    const videoData = [
+        { type: 'youtube', url: "https://www.youtube.com/embed/6J7wE0V-R0U" },
+        { type: 'sample', url: "https://www.w3schools.com/html/mov_bbb.mp4" }
+    ];
+
+    // ============================================================
+    // RENDER GALLERY
+    // ============================================================
+    function renderGallery() {
+        const container = document.getElementById('imageGallery');
+        container.innerHTML = '';
+        galleryImages.forEach((img, index) => {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.dataset.index = index;
+            div.innerHTML = `
+                <img src="${img.url}" alt="${img.overlay}" />
+                <div class="badge">${img.badge}</div>
+                <div class="overlay">${img.overlay}</div>
+                <button class="admin-delete" onclick="deleteImage(${index})"><i class="fas fa-trash-alt"></i></button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    // ============================================================
+    // RENDER VIDEOS
+    // ============================================================
+    function renderVideos() {
+        const container = document.getElementById('videoGallery');
+        container.innerHTML = '';
+        videoData.forEach((video, index) => {
+            const div = document.createElement('div');
+            div.className = 'video-item';
+            div.dataset.index = index;
+            let inner = '';
+            if (video.type === 'youtube') {
+                inner = `<iframe src="${video.url}" allowfullscreen></iframe><div class="youtube-badge">YouTube</div>`;
+            } else {
+                inner = `<video src="${video.url}" controls></video><div class="youtube-badge">Sample</div>`;
+            }
+            div.innerHTML = inner + `<button class="admin-delete" onclick="deleteVideo(${index})"><i class="fas fa-trash-alt"></i></button>`;
+            container.appendChild(div);
+        });
+    }
+
+    // ============================================================
+    // ADMIN FUNCTIONS
+    // ============================================================
+    function deleteImage(index) {
+        if (confirm('Delete this image?')) {
+            galleryImages.splice(index, 1);
+            renderGallery();
+            showToast('🗑️ Image deleted');
+        }
+    }
+
+    function deleteVideo(index) {
+        if (confirm('Delete this video?')) {
+            videoData.splice(index, 1);
+            renderVideos();
+            showToast('🗑️ Video deleted');
+        }
+    }
+
+    function addImage(url) {
+        if (!url || url.trim() === '') {
+            document.getElementById('adminStatus').textContent = '⚠️ Please enter a valid URL';
+            return;
+        }
+        galleryImages.push({
+            url: url.trim(),
+            badge: 'Uploaded',
+            overlay: 'New Image'
+        });
+        renderGallery();
+        document.getElementById('newImageUrl').value = '';
+        document.getElementById('adminStatus').textContent = '✅ Image added successfully!';
+        setTimeout(() => document.getElementById('adminStatus').textContent = '', 3000);
+        showToast('📸 Image added to gallery');
+    }
+
+    function addVideo(url) {
+        if (!url || url.trim() === '') {
+            document.getElementById('adminStatus').textContent = '⚠️ Please enter a valid URL';
+            return;
+        }
+        let finalUrl = url.trim();
+        // Convert watch URL to embed URL if needed
+        if (finalUrl.includes('watch?v=')) {
+            const id = finalUrl.split('v=')[1]?.split('&')[0];
+            if (id) finalUrl = `https://www.youtube.com/embed/${id}`;
+        } else if (finalUrl.includes('youtu.be/')) {
+            const id = finalUrl.split('youtu.be/')[1]?.split('?')[0];
+            if (id) finalUrl = `https://www.youtube.com/embed/${id}`;
+        }
+        videoData.push({
+            type: finalUrl.includes('youtube.com/embed') ? 'youtube' : 'sample',
+            url: finalUrl
+        });
+        renderVideos();
+        document.getElementById('newVideoUrl').value = '';
+        document.getElementById('adminStatus').textContent = '✅ Video added successfully!';
+        setTimeout(() => document.getElementById('adminStatus').textContent = '', 3000);
+        showToast('🎬 Video added to gallery');
+    }
+
+    // ============================================================
+    // ADMIN PANEL CONTROLS
+    // ============================================================
+    const adminLock = document.getElementById('adminLock');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminOverlay = document.getElementById('adminOverlay');
+    const adminClose = document.getElementById('adminClose');
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminPassword = document.getElementById('adminPassword');
+    const loginStatus = document.getElementById('loginStatus');
+    const adminContent = document.getElementById('adminContent');
+    const adminLoginSection = document.getElementById('adminLogin');
+    const addImageBtn = document.getElementById('addImageBtn');
+    const addVideoBtn = document.getElementById('addVideoBtn');
+    const newImageUrl = document.getElementById('newImageUrl');
+    const newVideoUrl = document.getElementById('newVideoUrl');
+
+    const ADMIN_PASSWORD = 'admin123';
+
+    function openAdminPanel() {
+        adminPanel.classList.add('visible');
+        adminOverlay.classList.add('visible');
+        adminPassword.value = '';
+        loginStatus.textContent = '';
+        adminLoginSection.style.display = 'block';
+        adminContent.style.display = 'none';
+    }
+
+    function closeAdminPanel() {
+        adminPanel.classList.remove('visible');
+        adminOverlay.classList.remove('visible');
+    }
+
+    adminLock.addEventListener('click', openAdminPanel);
+    adminOverlay.addEventListener('click', closeAdminPanel);
+    adminClose.addEventListener('click', closeAdminPanel);
+
+    adminLoginBtn.addEventListener('click', function() {
+        if (adminPassword.value === ADMIN_PASSWORD) {
+            adminLoginSection.style.display = 'none';
+            adminContent.style.display = 'block';
+            loginStatus.textContent = '';
+            document.body.classList.add('admin-mode');
+            showToast('🔓 Admin mode activated');
+        } else {
+            loginStatus.textContent = '❌ Incorrect password!';
+            loginStatus.style.color = '#e74c3c';
+        }
+    });
+
+    adminPassword.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') adminLoginBtn.click();
+    });
+
+    addImageBtn.addEventListener('click', function() {
+        addImage(newImageUrl.value);
+    });
+
+    addVideoBtn.addEventListener('click', function() {
+        addVideo(newVideoUrl.value);
+    });
+
     // ============================================================
     // TOPPERS DATA (Static rendering only)
     // ============================================================
@@ -1054,12 +1451,14 @@
     }
 
     // ============================================================
-    // NAVIGATION - ONLY FUNCTIONALITY REMAINING
+    // NAVIGATION
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById('homePage').classList.add('active');
         document.querySelector('.nav-links a[data-page="home"]').classList.add('active');
+        renderGallery();
+        renderVideos();
     });
 
     document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
@@ -1079,4 +1478,4 @@
     });
 </script>
 </body>
-</html>
+    </html>
